@@ -11,8 +11,8 @@ import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.sdk.language.psi.SimpleProperty;
-
+import io.github.jhipster.jdl.JdlFileType;
+import io.github.jhipster.jdl.psi.JdlProperty;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -70,7 +70,7 @@ public class SimpleCodeInsightTest extends LightJavaCodeInsightFixtureTestCase {
   }
 
   public void testCommenter() {
-    myFixture.configureByText(SimpleFileType.INSTANCE, "<caret>website = https://en.wikipedia.org/");
+    myFixture.configureByText(JdlFileType.INSTANCE, "<caret>website = https://en.wikipedia.org/");
     CommentByLineCommentAction commentAction = new CommentByLineCommentAction();
     commentAction.actionPerformedImpl(getProject(), myFixture.getEditor());
     myFixture.checkResult("#website = https://en.wikipedia.org/");
@@ -81,7 +81,7 @@ public class SimpleCodeInsightTest extends LightJavaCodeInsightFixtureTestCase {
   public void testReference() {
     myFixture.configureByFiles("ReferenceTestData.java", "DefaultTestData.simple");
     PsiElement element = myFixture.getFile().findElementAt(myFixture.getCaretOffset()).getParent();
-    assertEquals("https://en.wikipedia.org/", ((SimpleProperty) element.getReferences()[0].resolve()).getValue());
+    assertEquals("https://en.wikipedia.org/", ((JdlProperty) element.getReferences()[0].resolve()).getValue());
   }
 
 }

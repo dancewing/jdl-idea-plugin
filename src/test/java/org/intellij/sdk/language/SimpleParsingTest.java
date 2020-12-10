@@ -3,17 +3,18 @@
 package org.intellij.sdk.language;
 
 import com.intellij.testFramework.ParsingTestCase;
+import io.github.jhipster.jdl.JdlParserDefinition;
 
 public class SimpleParsingTest extends ParsingTestCase {
 
   public SimpleParsingTest() {
-    super("", "simple", new SimpleParserDefinition());
+    super("", "simple", new JdlParserDefinition());
   }
 
   public void testParsingTestData() {
     doTest(true);
   }
-  
+
   /**
    * @return path to test data file directory relative to root of this module.
    */

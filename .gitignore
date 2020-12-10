@@ -1,6 +1,7 @@
 # javadoc
 docs.tar
-
+jflex-1.7.0-2.jar
+idea-flex.skeleton
 # Ant
 build
 

@@ -1,0 +1,32 @@
+// Copyright 2000-2020 JetBrains s.r.o. and other contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+{
+  parserClass="io.github.jhipster.jdl.parser.JdlParser"
+  parserUtilClass="io.github.jhipster.jdl.parser.JdlParserUtil"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Jdl"
+  psiImplClassSuffix="Impl"
+  psiPackage="io.github.jhipster.jdl.psi"
+  psiImplPackage="io.github.jhipster.jdl.psi.impl"
+
+  elementTypeHolderClass="io.github.jhipster.jdl.psi.JdlTypes"
+  elementTypeClass="io.github.jhipster.jdl.psi.JdlElementType"
+  tokenTypeClass="io.github.jhipster.jdl.psi.JdlTokenType"
+
+  psiImplUtilClass="io.github.jhipster.jdl.psi.impl.JdlPsiImplUtil"
+}
+
+simpleFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY {
+  pin=3
+  recoverWhile="recover_property"
+  mixin="io.github.jhipster.jdl.psi.impl.JdlNamedElementImpl"
+  implements="io.github.jhipster.jdl.psi.JdlNamedElement"
+  methods=[getKey getValue getName setName getNameIdentifier getPresentation]
+}
+
+private recover_property ::= !(KEY|SEPARATOR|COMMENT)
