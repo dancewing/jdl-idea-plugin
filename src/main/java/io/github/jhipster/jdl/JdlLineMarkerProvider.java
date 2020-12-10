@@ -43,7 +43,7 @@ public class JdlLineMarkerProvider extends RelatedItemLineMarkerProvider {
       NavigationGutterIconBuilder<PsiElement> builder =
               NavigationGutterIconBuilder.create(JdlIcons.FILE)
                       .setTargets(properties)
-                      .setTooltipText("Navigate to Simple language property");
+                      .setTooltipText("Navigate to Jdl language property");
       result.add(builder.createLineMarkerInfo(element));
     }
   }

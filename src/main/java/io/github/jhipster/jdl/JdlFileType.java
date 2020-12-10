@@ -19,19 +19,19 @@ public class JdlFileType extends LanguageFileType {
   @NotNull
   @Override
   public String getName() {
-    return "Simple File";
+    return "Jdl File";
   }
 
   @NotNull
   @Override
   public String getDescription() {
-    return "Simple language file";
+    return "Jdl language file";
   }
 
   @NotNull
   @Override
   public String getDefaultExtension() {
-    return "simple";
+    return "jdl";
   }
 
   @Nullable

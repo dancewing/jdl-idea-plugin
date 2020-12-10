@@ -22,7 +22,7 @@ public class JdlCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
   @Nullable
   @Override
   public String getConfigurableDisplayName() {
-    return "Simple";
+    return "Jdl";
   }
 
   @NotNull

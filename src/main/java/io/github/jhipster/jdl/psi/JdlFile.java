@@ -23,7 +23,7 @@ public class JdlFile extends PsiFileBase {
 
   @Override
   public String toString() {
-    return "Simple File";
+    return "Jdl File";
   }
 
 }

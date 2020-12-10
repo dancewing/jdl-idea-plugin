@@ -28,7 +28,7 @@ public class SimpleCodeInsightTest extends LightJavaCodeInsightFixtureTestCase {
   }
 
   public void testCompletion() {
-    myFixture.configureByFiles("CompleteTestData.java", "DefaultTestData.simple");
+    myFixture.configureByFiles("CompleteTestData.java", "DefaultTestData.jdl");
     myFixture.complete(CompletionType.BASIC, 1);
     List<String> strings = myFixture.getLookupElementStrings();
     assertTrue(strings.containsAll(Arrays.asList("key with spaces", "language", "message", "tab", "website")));
@@ -36,12 +36,12 @@ public class SimpleCodeInsightTest extends LightJavaCodeInsightFixtureTestCase {
   }
 
   public void testAnnotator() {
-    myFixture.configureByFiles("AnnotatorTestData.java", "DefaultTestData.simple");
+    myFixture.configureByFiles("AnnotatorTestData.java", "DefaultTestData.jdl");
     myFixture.checkHighlighting(false, false, true, true);
   }
 
   public void testFormatter() {
-    myFixture.configureByFile("FormatterTestData.simple");
+    myFixture.configureByFile("FormatterTestData.jdl");
     CodeStyle.getLanguageSettings(myFixture.getFile()).SPACE_AROUND_ASSIGNMENT_OPERATORS = true;
     CodeStyle.getLanguageSettings(myFixture.getFile()).KEEP_BLANK_LINES_IN_CODE = 2;
     WriteCommandAction.writeCommandAction(getProject()).run(() ->
@@ -50,22 +50,22 @@ public class SimpleCodeInsightTest extends LightJavaCodeInsightFixtureTestCase {
                     ContainerUtil.newArrayList(myFixture.getFile().getTextRange())
             )
     );
-    myFixture.checkResultByFile("DefaultTestData.simple");
+    myFixture.checkResultByFile("DefaultTestData.jdl");
   }
 
   public void testRename() {
-    myFixture.configureByFiles("RenameTestData.java", "RenameTestData.simple");
+    myFixture.configureByFiles("RenameTestData.java", "RenameTestData.jdl");
     myFixture.renameElementAtCaret("websiteUrl");
-    myFixture.checkResultByFile("RenameTestData.simple", "RenameTestDataAfter.simple", false);
+    myFixture.checkResultByFile("RenameTestData.jdl", "RenameTestDataAfter.jdl", false);
   }
 
   public void testFolding() {
-    myFixture.configureByFile("DefaultTestData.simple");
+    myFixture.configureByFile("DefaultTestData.jdl");
     myFixture.testFolding(getTestDataPath() + "/FoldingTestData.java");
   }
 
   public void testFindUsages() {
-    Collection<UsageInfo> usageInfos = myFixture.testFindUsages("FindUsagesTestData.simple", "FindUsagesTestData.java");
+    Collection<UsageInfo> usageInfos = myFixture.testFindUsages("FindUsagesTestData.jdl", "FindUsagesTestData.java");
     assertEquals(1, usageInfos.size());
   }
 
@@ -79,7 +79,7 @@ public class SimpleCodeInsightTest extends LightJavaCodeInsightFixtureTestCase {
   }
 
   public void testReference() {
-    myFixture.configureByFiles("ReferenceTestData.java", "DefaultTestData.simple");
+    myFixture.configureByFiles("ReferenceTestData.java", "DefaultTestData.jdl");
     PsiElement element = myFixture.getFile().findElementAt(myFixture.getCaretOffset()).getParent();
     assertEquals("https://en.wikipedia.org/", ((JdlProperty) element.getReferences()[0].resolve()).getValue());
   }

@@ -8,7 +8,7 @@ import io.github.jhipster.jdl.JdlParserDefinition;
 public class SimpleParsingTest extends ParsingTestCase {
 
   public SimpleParsingTest() {
-    super("", "simple", new JdlParserDefinition());
+    super("", "jdl", new JdlParserDefinition());
   }
 
   public void testParsingTestData() {

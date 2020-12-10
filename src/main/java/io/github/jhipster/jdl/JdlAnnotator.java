@@ -18,7 +18,7 @@ import java.util.List;
 public class JdlAnnotator implements Annotator {
 
   // Define strings for the Simple language prefix - used for annotations, line markers, etc.
-  public static final String SIMPLE_PREFIX_STR = "simple";
+  public static final String SIMPLE_PREFIX_STR = "jdl";
   public static final String SIMPLE_SEPARATOR_STR = ":";
 
   @Override

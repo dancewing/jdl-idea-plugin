@@ -9,7 +9,7 @@ public class JdlLanguage extends Language {
   public static final JdlLanguage INSTANCE = new JdlLanguage();
 
   private JdlLanguage() {
-    super("Simple");
+    super("Jdl");
   }
 
 }

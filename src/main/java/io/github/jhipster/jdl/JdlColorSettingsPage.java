@@ -72,7 +72,7 @@ public class JdlColorSettingsPage implements ColorSettingsPage {
   @NotNull
   @Override
   public String getDisplayName() {
-    return "Simple";
+    return "Jdl";
   }
 
 }

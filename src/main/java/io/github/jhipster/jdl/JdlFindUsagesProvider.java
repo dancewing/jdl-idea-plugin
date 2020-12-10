@@ -39,7 +39,7 @@ public class JdlFindUsagesProvider implements FindUsagesProvider {
   @Override
   public String getType(@NotNull PsiElement element) {
     if (element instanceof JdlProperty) {
-      return "simple property";
+      return "jdl property";
     } else {
       return "";
     }

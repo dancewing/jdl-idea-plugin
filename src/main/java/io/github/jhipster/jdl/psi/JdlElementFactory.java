@@ -15,7 +15,7 @@ public class JdlElementFactory {
   }
 
   public static JdlFile createFile(Project project, String text) {
-    String name = "dummy.simple";
+    String name = "dummy.jdl";
     return (JdlFile) PsiFileFactory.getInstance(project).createFileFromText(name, JdlFileType.INSTANCE, text);
   }
 
