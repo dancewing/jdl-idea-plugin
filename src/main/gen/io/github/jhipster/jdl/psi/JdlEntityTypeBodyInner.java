@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface JdlEntityTypeBodyInner extends PsiElement {
 
+  @NotNull
+  List<JdlFieldMember> getFieldMemberList();
+
 }

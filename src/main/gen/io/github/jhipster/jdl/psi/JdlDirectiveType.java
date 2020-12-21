@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlTopLevel extends PsiElement {
+public interface JdlDirectiveType extends PsiElement {
 
-  @Nullable
-  JdlApplicationType getApplicationType();
-
-  @Nullable
-  JdlEntityType getEntityType();
+  @NotNull
+  JdlDirectiveTypeDefinition getDirectiveTypeDefinition();
 
 }

@@ -1,0 +1,3 @@
+application{}
+entity Test {}
+entity test222 {}

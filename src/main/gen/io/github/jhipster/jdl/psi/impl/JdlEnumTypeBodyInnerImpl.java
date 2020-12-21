@@ -10,26 +10,20 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlEntityTypeImpl extends JdlPsiCompositeElementImpl implements JdlEntityType {
+public class JdlEnumTypeBodyInnerImpl extends JdlPsiCompositeElementImpl implements JdlEnumTypeBodyInner {
 
-  public JdlEntityTypeImpl(@NotNull ASTNode node) {
+  public JdlEnumTypeBodyInnerImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull JdlVisitor visitor) {
-    visitor.visitEntityType(this);
+    visitor.visitEnumTypeBodyInner(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof JdlVisitor) accept((JdlVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public JdlEntityTypeDefinition getEntityTypeDefinition() {
-    return findNotNullChildByClass(JdlEntityTypeDefinition.class);
   }
 
 }

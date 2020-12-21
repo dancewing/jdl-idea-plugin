@@ -10,19 +10,19 @@ public class JdlCommenter implements Commenter {
   @Nullable
   @Override
   public String getLineCommentPrefix() {
-    return "#";
+    return "//";
   }
 
   @Nullable
   @Override
   public String getBlockCommentPrefix() {
-    return "";
+    return "/*";
   }
 
   @Nullable
   @Override
   public String getBlockCommentSuffix() {
-    return null;
+    return "*/";
   }
 
   @Nullable

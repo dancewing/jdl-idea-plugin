@@ -15,7 +15,7 @@ public class JdlTokenType extends IElementType {
 
   @Override
   public String toString() {
-    return "SimpleTokenType." + super.toString();
+    return "JdlTokenType." + super.toString();
   }
 
 }

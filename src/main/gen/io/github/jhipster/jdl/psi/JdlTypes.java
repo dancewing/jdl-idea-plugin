@@ -12,23 +12,36 @@ public interface JdlTypes {
   IElementType APPLICATION_TYPE_BODY = new JdlElementType("APPLICATION_TYPE_BODY");
   IElementType APPLICATION_TYPE_BODY_INNER = new JdlElementType("APPLICATION_TYPE_BODY_INNER");
   IElementType APPLICATION_TYPE_DEFINITION = new JdlElementType("APPLICATION_TYPE_DEFINITION");
+  IElementType DIRECTIVE_TYPE = new JdlElementType("DIRECTIVE_TYPE");
+  IElementType DIRECTIVE_TYPE_BODY = new JdlElementType("DIRECTIVE_TYPE_BODY");
+  IElementType DIRECTIVE_TYPE_DEFINITION = new JdlElementType("DIRECTIVE_TYPE_DEFINITION");
+  IElementType ENTITY_NAME = new JdlElementType("ENTITY_NAME");
   IElementType ENTITY_TYPE = new JdlElementType("ENTITY_TYPE");
   IElementType ENTITY_TYPE_BODY = new JdlElementType("ENTITY_TYPE_BODY");
   IElementType ENTITY_TYPE_BODY_INNER = new JdlElementType("ENTITY_TYPE_BODY_INNER");
   IElementType ENTITY_TYPE_DEFINITION = new JdlElementType("ENTITY_TYPE_DEFINITION");
-  IElementType TOP_LEVEL = new JdlElementType("TOP_LEVEL");
-  IElementType TOP_LEVELS = new JdlElementType("TOP_LEVELS");
-  IElementType TOP_LEVEL_ITEM = new JdlElementType("TOP_LEVEL_ITEM");
+  IElementType ENTRY = new JdlElementType("ENTRY");
+  IElementType ENTRY_ITEM = new JdlElementType("ENTRY_ITEM");
+  IElementType ENUM_TYPE = new JdlElementType("ENUM_TYPE");
+  IElementType ENUM_TYPE_BODY = new JdlElementType("ENUM_TYPE_BODY");
+  IElementType ENUM_TYPE_BODY_INNER = new JdlElementType("ENUM_TYPE_BODY_INNER");
+  IElementType ENUM_TYPE_DEFINITION = new JdlElementType("ENUM_TYPE_DEFINITION");
+  IElementType FIELD_MEMBER = new JdlElementType("FIELD_MEMBER");
+  IElementType ID = new JdlElementType("ID");
 
   IElementType BLANK = new JdlTokenType("BLANK");
-  IElementType BLOCK_COMMENT = new JdlTokenType("BLOCK_COMMENT");
-  IElementType IDENTIFIER = new JdlTokenType("identifier");
+  IElementType COMMENT = new JdlTokenType("COMMENT");
+  IElementType DIRECTIVE_MICROSERVICE = new JdlTokenType("microservice");
+  IElementType DIRECTIVE_PAGINATE = new JdlTokenType("paginate");
+  IElementType DIRECTIVE_SERVICE = new JdlTokenType("service");
+  IElementType IDENTIFIER = new JdlTokenType("IDENTIFIER");
   IElementType KW_APPLICATION = new JdlTokenType("application");
   IElementType KW_ENTITY = new JdlTokenType("entity");
   IElementType KW_ENUM = new JdlTokenType("enum");
   IElementType LINEFEED = new JdlTokenType("\\n");
+  IElementType LOW_ID = new JdlTokenType("LOW_ID");
   IElementType ML_COMMENT = new JdlTokenType("block comment");
-  IElementType NL = new JdlTokenType("new line");
+  IElementType NL = new JdlTokenType("NL");
   IElementType NUM_ANY_BLOB = new JdlTokenType("AnyBlob");
   IElementType NUM_BIG_DECIMAL = new JdlTokenType("BigDecimal");
   IElementType NUM_BLOB = new JdlTokenType("Blob");
@@ -52,6 +65,8 @@ public interface JdlTypes {
   IElementType T_RBRACK = new JdlTokenType("]");
   IElementType T_RPAREN = new JdlTokenType(")");
   IElementType T_WRONG = new JdlTokenType("wrong token");
+  IElementType UP_ID = new JdlTokenType("UP_ID");
+  IElementType V_REQUIRED = new JdlTokenType("required");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -68,6 +83,18 @@ public interface JdlTypes {
       else if (type == APPLICATION_TYPE_DEFINITION) {
         return new JdlApplicationTypeDefinitionImpl(node);
       }
+      else if (type == DIRECTIVE_TYPE) {
+        return new JdlDirectiveTypeImpl(node);
+      }
+      else if (type == DIRECTIVE_TYPE_BODY) {
+        return new JdlDirectiveTypeBodyImpl(node);
+      }
+      else if (type == DIRECTIVE_TYPE_DEFINITION) {
+        return new JdlDirectiveTypeDefinitionImpl(node);
+      }
+      else if (type == ENTITY_NAME) {
+        return new JdlEntityNameImpl(node);
+      }
       else if (type == ENTITY_TYPE) {
         return new JdlEntityTypeImpl(node);
       }
@@ -80,14 +107,29 @@ public interface JdlTypes {
       else if (type == ENTITY_TYPE_DEFINITION) {
         return new JdlEntityTypeDefinitionImpl(node);
       }
-      else if (type == TOP_LEVEL) {
-        return new JdlTopLevelImpl(node);
+      else if (type == ENTRY) {
+        return new JdlEntryImpl(node);
       }
-      else if (type == TOP_LEVELS) {
-        return new JdlTopLevelsImpl(node);
+      else if (type == ENTRY_ITEM) {
+        return new JdlEntryItemImpl(node);
       }
-      else if (type == TOP_LEVEL_ITEM) {
-        return new JdlTopLevelItemImpl(node);
+      else if (type == ENUM_TYPE) {
+        return new JdlEnumTypeImpl(node);
+      }
+      else if (type == ENUM_TYPE_BODY) {
+        return new JdlEnumTypeBodyImpl(node);
+      }
+      else if (type == ENUM_TYPE_BODY_INNER) {
+        return new JdlEnumTypeBodyInnerImpl(node);
+      }
+      else if (type == ENUM_TYPE_DEFINITION) {
+        return new JdlEnumTypeDefinitionImpl(node);
+      }
+      else if (type == FIELD_MEMBER) {
+        return new JdlFieldMemberImpl(node);
+      }
+      else if (type == ID) {
+        return new JdlIdImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

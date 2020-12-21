@@ -23,6 +23,22 @@ public class JdlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitDirectiveType(@NotNull JdlDirectiveType o) {
+    visitPsiElement(o);
+  }
+
+  public void visitDirectiveTypeBody(@NotNull JdlDirectiveTypeBody o) {
+    visitPsiElement(o);
+  }
+
+  public void visitDirectiveTypeDefinition(@NotNull JdlDirectiveTypeDefinition o) {
+    visitPsiElement(o);
+  }
+
+  public void visitEntityName(@NotNull JdlEntityName o) {
+    visitPsiElement(o);
+  }
+
   public void visitEntityType(@NotNull JdlEntityType o) {
     visitPsiElement(o);
   }
@@ -39,15 +55,35 @@ public class JdlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitTopLevel(@NotNull JdlTopLevel o) {
+  public void visitEntry(@NotNull JdlEntry o) {
     visitPsiElement(o);
   }
 
-  public void visitTopLevelItem(@NotNull JdlTopLevelItem o) {
+  public void visitEntryItem(@NotNull JdlEntryItem o) {
     visitPsiElement(o);
   }
 
-  public void visitTopLevels(@NotNull JdlTopLevels o) {
+  public void visitEnumType(@NotNull JdlEnumType o) {
+    visitPsiElement(o);
+  }
+
+  public void visitEnumTypeBody(@NotNull JdlEnumTypeBody o) {
+    visitPsiElement(o);
+  }
+
+  public void visitEnumTypeBodyInner(@NotNull JdlEnumTypeBodyInner o) {
+    visitPsiElement(o);
+  }
+
+  public void visitEnumTypeDefinition(@NotNull JdlEnumTypeDefinition o) {
+    visitPsiElement(o);
+  }
+
+  public void visitFieldMember(@NotNull JdlFieldMember o) {
+    visitPsiElement(o);
+  }
+
+  public void visitId(@NotNull JdlId o) {
     visitPsiElement(o);
   }
 

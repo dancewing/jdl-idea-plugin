@@ -7,7 +7,7 @@ import com.intellij.lexer.FlexAdapter;
 public class JdlLexerAdapter extends FlexAdapter {
 
   public JdlLexerAdapter() {
-    super(new JdlLexer(null));
+    super(new _JdlLexer(null));
   }
 
 }

@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface JdlEntityTypeDefinition extends PsiElement {
 
   @NotNull
+  JdlEntityName getEntityName();
+
+  @NotNull
   JdlEntityTypeBody getEntityTypeBody();
 
 }

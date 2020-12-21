@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlEntityTypeBodyImpl extends ASTWrapperPsiElement implements JdlEntityTypeBody {
+public class JdlEntityTypeBodyImpl extends JdlPsiCompositeElementImpl implements JdlEntityTypeBody {
 
   public JdlEntityTypeBodyImpl(@NotNull ASTNode node) {
     super(node);
@@ -29,8 +28,8 @@ public class JdlEntityTypeBodyImpl extends ASTWrapperPsiElement implements JdlEn
 
   @Override
   @NotNull
-  public JdlEntityTypeBodyInner getEntityTypeBodyInner() {
-    return findNotNullChildByClass(JdlEntityTypeBodyInner.class);
+  public List<JdlEntityTypeBodyInner> getEntityTypeBodyInnerList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlEntityTypeBodyInner.class);
   }
 
 }

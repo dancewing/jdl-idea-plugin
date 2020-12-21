@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlApplicationTypeImpl extends ASTWrapperPsiElement implements JdlApplicationType {
+public class JdlApplicationTypeImpl extends JdlPsiCompositeElementImpl implements JdlApplicationType {
 
   public JdlApplicationTypeImpl(@NotNull ASTNode node) {
     super(node);

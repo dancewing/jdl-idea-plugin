@@ -8,17 +8,16 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlTopLevelImpl extends ASTWrapperPsiElement implements JdlTopLevel {
+public class JdlIdImpl extends JdlPsiCompositeElementImpl implements JdlId {
 
-  public JdlTopLevelImpl(@NotNull ASTNode node) {
+  public JdlIdImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull JdlVisitor visitor) {
-    visitor.visitTopLevel(this);
+    visitor.visitId(this);
   }
 
   @Override
@@ -28,15 +27,9 @@ public class JdlTopLevelImpl extends ASTWrapperPsiElement implements JdlTopLevel
   }
 
   @Override
-  @Nullable
-  public JdlApplicationType getApplicationType() {
-    return findChildByClass(JdlApplicationType.class);
-  }
-
-  @Override
-  @Nullable
-  public JdlEntityType getEntityType() {
-    return findChildByClass(JdlEntityType.class);
+  @NotNull
+  public PsiElement getIdentifier() {
+    return findNotNullChildByType(IDENTIFIER);
   }
 
 }

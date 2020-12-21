@@ -44,27 +44,7 @@
       <fileTypeFactory implementation="io.github.jhipster.jdl.JdlFileTypeFactory"/>
     -->
     <lang.parserDefinition language="Jdl" implementationClass="io.github.jhipster.jdl.JdlParserDefinition"/>
-    <lang.syntaxHighlighterFactory language="Jdl"
-                                   implementationClass="io.github.jhipster.jdl.JdlSyntaxHighlighterFactory"/>
-    <colorSettingsPage implementation="io.github.jhipster.jdl.JdlColorSettingsPage"/>
-    <annotator language="JAVA" implementationClass="io.github.jhipster.jdl.JdlAnnotator"/>
-    <codeInsight.lineMarkerProvider language="JAVA"
-                                    implementationClass="io.github.jhipster.jdl.JdlLineMarkerProvider"/>
-    <completion.contributor language="Jdl"
-                            implementationClass="io.github.jhipster.jdl.JdlCompletionContributor"/>
-    <psi.referenceContributor language="JAVA"
-                              implementation="io.github.jhipster.jdl.JdlReferenceContributor"/>
-    <lang.refactoringSupport language="Jdl"
-                             implementationClass="io.github.jhipster.jdl.JdlRefactoringSupportProvider"/>
-    <lang.findUsagesProvider language="Jdl"
-                             implementationClass="io.github.jhipster.jdl.JdlFindUsagesProvider"/>
-    <lang.foldingBuilder language="JAVA" implementationClass="io.github.jhipster.jdl.JdlFoldingBuilder"/>
-    <gotoSymbolContributor implementation="io.github.jhipster.jdl.JdlChooseByNameContributor"/>
-    <lang.psiStructureViewFactory language="Jdl"
-                                  implementationClass="io.github.jhipster.jdl.JdlStructureViewFactory"/>
-    <lang.formatter language="Jdl" implementationClass="io.github.jhipster.jdl.JdlFormattingModelBuilder"/>
-    <codeStyleSettingsProvider implementation="io.github.jhipster.jdl.JdlCodeStyleSettingsProvider"/>
-    <langCodeStyleSettingsProvider implementation="io.github.jhipster.jdl.JdlLanguageCodeStyleSettingsProvider"/>
+
     <lang.commenter language="Jdl" implementationClass="io.github.jhipster.jdl.JdlCommenter"/>
   </extensions>
 
