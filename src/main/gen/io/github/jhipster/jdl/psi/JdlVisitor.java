@@ -58,10 +58,6 @@ public class JdlVisitor extends PsiElementVisitor {
     visitComponent(o);
   }
 
-  public void visitEnumTypeBodyInner(@NotNull JdlEnumTypeBodyInner o) {
-    visitPsiCompositeElement(o);
-  }
-
   public void visitEnumTypeDefinition(@NotNull JdlEnumTypeDefinition o) {
     visitClass(o);
   }

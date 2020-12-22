@@ -32,6 +32,8 @@ public interface JdlTokenTypes {
   IElementType SINGLE_LINE_DOC_COMMENT = new JdlElementType("SINGLE_LINE_DOC_COMMENT");
   IElementType MULTI_LINE_COMMENT = new JdlElementType("MULTI_LINE_COMMENT");
 
+  //TokenSet STRINGS = TokenSet.create(RAW_SINGLE_QUOTED_STRING, RAW_TRIPLE_QUOTED_STRING, OPEN_QUOTE, CLOSING_QUOTE, REGULAR_STRING_PART);
+
   IElementType MULTI_LINE_DOC_COMMENT = new DartDocCommentElementType();
 
   class DartDocCommentElementType extends ILazyParseableElementType {
@@ -63,6 +65,65 @@ public interface JdlTokenTypes {
 
   //TokenSet RESERVED_WORDS = TokenSet.create(ASSERT)
   TokenSet COMMENTS = TokenSet.create(SINGLE_LINE_COMMENT, SINGLE_LINE_DOC_COMMENT, MULTI_LINE_COMMENT, MULTI_LINE_DOC_COMMENT);
+
+  TokenSet RESERVED_WORDS = TokenSet.create(ASSERT,
+      BREAK,
+      CASE,
+      CATCH,
+      CLASS,
+      CONST,
+      CONTINUE,
+      DEFAULT,
+      DO,
+      ELSE,
+      ENUM,
+      EXTENDS,
+      FALSE,
+      FINAL,
+      FINALLY,
+      FOR,
+      IF,
+      IN,
+      IS,
+      NEW,
+      NULL,
+      RETHROW,
+      RETURN,
+      SUPER,
+      SWITCH,
+      THIS,
+      THROW,
+      TRUE,
+      TRY,
+      VAR,
+      WHILE,
+      WITH,
+      // 'void' is not listed as reserved word in spec but it may only be used as the return type of a function, so may be treated as reserved word
+      VOID,
+      APPLICATION,
+      ENTITY,
+      DIRECTIVE_SERVICE,
+      DIRECTIVE_PAGINATE,
+      DIRECTIVE_MICROSERVICE,
+      AP_ENTITIES,
+      AP_CONFIG,
+      NUM_STRING,
+      NUM_INT,
+      NUM_LONG,
+      NUM_BIG_DECIMAL,
+      NUM_FLOAT,
+      NUM_DOUBLE,
+      NUM_ENUM,
+      NUM_BOOELAN,
+      NUM_LOCAL_DATE,
+      NUM_ZONED_DATE_TIME,
+      NUM_BLOB,
+      NUM_ANY_BLOB,
+      NUM_IMAGE_BLOB,
+      NUM_TEXT_BLOB,
+
+      REQUIRED
+      );
 
   TokenSet BUILT_IN_IDENTIFIERS = TokenSet.create(ABSTRACT,
       AS,

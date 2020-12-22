@@ -94,30 +94,6 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // BLANK
-  static boolean blank(PsiBuilder b, int l) {
-    return consumeTokenFast(b, BLANK);
-  }
-
-  /* ********************************************************** */
-  // <<eof>> | '}'
-  static boolean brace_end(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "brace_end")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = eof(b, l + 1);
-    if (!r) r = consumeToken(b, RBRACE);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // '{'
-  static boolean brace_start(PsiBuilder b, int l) {
-    return consumeToken(b, LBRACE);
-  }
-
-  /* ********************************************************** */
   // << nonStrictID >>
   public static boolean componentName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "componentName")) return false;
@@ -310,14 +286,6 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ()
-  public static boolean enum_type_body_inner(PsiBuilder b, int l) {
-    Marker m = enter_section_(b);
-    exit_section_(b, m, ENUM_TYPE_BODY_INNER, true);
-    return true;
-  }
-
-  /* ********************************************************** */
   // 'enum' componentName '{' enumConstantDeclaration (',' enumConstantDeclaration)* ','? '}'
   public static boolean enum_type_definition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enum_type_definition")) return false;
@@ -461,89 +429,6 @@ public class JdlParser implements PsiParser, LightPsiParser {
       if (!empty_element_parsed_guard_(b, "jdlFile", c)) break;
     }
     return true;
-  }
-
-  /* ********************************************************** */
-  // blank?
-  static boolean mb_blanks(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "mb_blanks")) return false;
-    blank(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // nl*
-  static boolean mb_nl(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "mb_nl")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!nl(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "mb_nl", c)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
-  // separator*
-  static boolean mb_separators(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "mb_separators")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!separator(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "mb_separators", c)) break;
-    }
-    return true;
-  }
-
-  /* ********************************************************** */
-  // NL
-  static boolean nl(PsiBuilder b, int l) {
-    return consumeTokenFast(b, NL);
-  }
-
-  /* ********************************************************** */
-  // nl+
-  static boolean nls(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "nls")) return false;
-    if (!nextTokenIsFast(b, NL)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = nl(b, l + 1);
-    while (r) {
-      int c = current_position_(b);
-      if (!nl(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "nls", c)) break;
-    }
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // ',' | NL
-  static boolean separator(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "separator")) return false;
-    if (!nextTokenIs(b, "", COMMA, NL)) return false;
-    boolean r;
-    r = consumeToken(b, COMMA);
-    if (!r) r = consumeToken(b, NL);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // separator+
-  static boolean separators(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "separators")) return false;
-    if (!nextTokenIs(b, "", COMMA, NL)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = separator(b, l + 1);
-    while (r) {
-      int c = current_position_(b);
-      if (!separator(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "separators", c)) break;
-    }
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   /* ********************************************************** */

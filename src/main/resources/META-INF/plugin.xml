@@ -38,6 +38,11 @@
   <extensions defaultExtensionNs="com.intellij">
     <fileType name="Jdl File" implementationClass="io.github.jhipster.jdl.JdlFileType" fieldName="INSTANCE"
               language="Jdl" extensions="jdl"/>
+    <lang.syntaxHighlighter language="Jdl" implementationClass="io.github.jhipster.jdl.highlight.JdlSyntaxHighlighter"/>
+    <highlightErrorFilter implementation="io.github.jhipster.jdl.highlight.JdlHighlightingErrorFilter"/>
+
+    <lang.braceMatcher language="Jdl" implementationClass="io.github.jhipster.jdl.ide.JdlBraceMatcher"/>
+
     <!--
       Only required for versions of the IntelliJ Platform prior to v2019.2.
       Use 'com.intellij.fileTypeFactory' extension point INSTEAD of above 'com.intellij.fileType'.

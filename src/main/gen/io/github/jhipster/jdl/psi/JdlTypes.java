@@ -21,7 +21,6 @@ public interface JdlTypes {
   IElementType ENTITY_TYPE_DEFINITION = new JdlElementType("ENTITY_TYPE_DEFINITION");
   IElementType ENTRY = new JdlElementType("ENTRY");
   IElementType ENUM_CONSTANT_DECLARATION = new JdlElementType("ENUM_CONSTANT_DECLARATION");
-  IElementType ENUM_TYPE_BODY_INNER = new JdlElementType("ENUM_TYPE_BODY_INNER");
   IElementType ENUM_TYPE_DEFINITION = new JdlElementType("ENUM_TYPE_DEFINITION");
   IElementType FIELD_MEMBER = new JdlElementType("FIELD_MEMBER");
   IElementType ID = new JdlElementType("ID");
@@ -40,7 +39,6 @@ public interface JdlTypes {
   IElementType AT = new JdlTokenType("@");
   IElementType AWAIT = new JdlTokenType("await");
   IElementType BIN_NOT = new JdlTokenType("~");
-  IElementType BLANK = new JdlTokenType("BLANK");
   IElementType BREAK = new JdlTokenType("break");
   IElementType CASE = new JdlTokenType("case");
   IElementType CATCH = new JdlTokenType("catch");
@@ -96,8 +94,6 @@ public interface JdlTypes {
   IElementType LBRACE = new JdlTokenType("{");
   IElementType LBRACKET = new JdlTokenType("[");
   IElementType LIBRARY = new JdlTokenType("library");
-  IElementType LINEFEED = new JdlTokenType("\\n");
-  IElementType LOW_ID = new JdlTokenType("LOW_ID");
   IElementType LPAREN = new JdlTokenType("(");
   IElementType LT = new JdlTokenType("<");
   IElementType LT_EQ = new JdlTokenType("<=");
@@ -107,13 +103,11 @@ public interface JdlTypes {
   IElementType MINUS_EQ = new JdlTokenType("-=");
   IElementType MINUS_MINUS = new JdlTokenType("--");
   IElementType MIXIN = new JdlTokenType("mixin");
-  IElementType ML_COMMENT = new JdlTokenType("block comment");
   IElementType MUL = new JdlTokenType("*");
   IElementType MUL_EQ = new JdlTokenType("*=");
   IElementType NATIVE = new JdlTokenType("native");
   IElementType NEQ = new JdlTokenType("!=");
   IElementType NEW = new JdlTokenType("new");
-  IElementType NL = new JdlTokenType("NL");
   IElementType NOT = new JdlTokenType("!");
   IElementType NULL = new JdlTokenType("null");
   IElementType NUM_ANY_BLOB = new JdlTokenType("AnyBlob");
@@ -157,8 +151,6 @@ public interface JdlTypes {
   IElementType SEMICOLON = new JdlTokenType(";");
   IElementType SET = new JdlTokenType("set");
   IElementType SHOW = new JdlTokenType("show");
-  IElementType SH_COMMENT = new JdlTokenType("shell comment");
-  IElementType SL_COMMENT = new JdlTokenType("line comment");
   IElementType STATIC = new JdlTokenType("static");
   IElementType SUPER = new JdlTokenType("super");
   IElementType SWITCH = new JdlTokenType("switch");
@@ -169,7 +161,6 @@ public interface JdlTypes {
   IElementType TRY = new JdlTokenType("try");
   IElementType TYPEDEF = new JdlTokenType("typedef");
   IElementType T_WRONG = new JdlTokenType("wrong token");
-  IElementType UP_ID = new JdlTokenType("UP_ID");
   IElementType VAR = new JdlTokenType("var");
   IElementType VOID = new JdlTokenType("void");
   IElementType WHILE = new JdlTokenType("while");
@@ -219,9 +210,6 @@ public interface JdlTypes {
       }
       else if (type == ENUM_CONSTANT_DECLARATION) {
         return new JdlEnumConstantDeclarationImpl(node);
-      }
-      else if (type == ENUM_TYPE_BODY_INNER) {
-        return new JdlEnumTypeBodyInnerImpl(node);
       }
       else if (type == ENUM_TYPE_DEFINITION) {
         return new JdlEnumTypeDefinitionImpl(node);
