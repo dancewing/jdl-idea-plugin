@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlEntityNameImpl extends JdlPsiCompositeElementImpl implements JdlEntityName {
+public class JdlComponentNameImpl extends JdlNamedElementImpl implements JdlComponentName {
 
-  public JdlEntityNameImpl(@NotNull ASTNode node) {
+  public JdlComponentNameImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull JdlVisitor visitor) {
-    visitor.visitEntityName(this);
+    visitor.visitComponentName(this);
   }
 
   @Override

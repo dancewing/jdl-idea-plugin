@@ -27,9 +27,9 @@ public class JdlApplicationTypeDefinitionImpl extends JdlPsiCompositeElementImpl
   }
 
   @Override
-  @NotNull
+  @Nullable
   public JdlApplicationTypeBody getApplicationTypeBody() {
-    return findNotNullChildByClass(JdlApplicationTypeBody.class);
+    return findChildByClass(JdlApplicationTypeBody.class);
   }
 
 }

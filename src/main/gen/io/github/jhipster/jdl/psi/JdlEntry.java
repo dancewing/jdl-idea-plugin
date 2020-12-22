@@ -5,18 +5,18 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlEntry extends PsiElement {
+public interface JdlEntry extends JdlPsiCompositeElement {
 
   @Nullable
-  JdlApplicationType getApplicationType();
+  JdlApplicationTypeDefinition getApplicationTypeDefinition();
 
   @Nullable
-  JdlDirectiveType getDirectiveType();
+  JdlDirectiveTypeDefinition getDirectiveTypeDefinition();
 
   @Nullable
-  JdlEntityType getEntityType();
+  JdlEntityTypeDefinition getEntityTypeDefinition();
 
   @Nullable
-  JdlEnumType getEnumType();
+  JdlEnumTypeDefinition getEnumTypeDefinition();
 
 }

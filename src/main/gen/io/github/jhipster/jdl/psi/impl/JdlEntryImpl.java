@@ -28,26 +28,26 @@ public class JdlEntryImpl extends JdlPsiCompositeElementImpl implements JdlEntry
 
   @Override
   @Nullable
-  public JdlApplicationType getApplicationType() {
-    return findChildByClass(JdlApplicationType.class);
+  public JdlApplicationTypeDefinition getApplicationTypeDefinition() {
+    return findChildByClass(JdlApplicationTypeDefinition.class);
   }
 
   @Override
   @Nullable
-  public JdlDirectiveType getDirectiveType() {
-    return findChildByClass(JdlDirectiveType.class);
+  public JdlDirectiveTypeDefinition getDirectiveTypeDefinition() {
+    return findChildByClass(JdlDirectiveTypeDefinition.class);
   }
 
   @Override
   @Nullable
-  public JdlEntityType getEntityType() {
-    return findChildByClass(JdlEntityType.class);
+  public JdlEntityTypeDefinition getEntityTypeDefinition() {
+    return findChildByClass(JdlEntityTypeDefinition.class);
   }
 
   @Override
   @Nullable
-  public JdlEnumType getEnumType() {
-    return findChildByClass(JdlEnumType.class);
+  public JdlEnumTypeDefinition getEnumTypeDefinition() {
+    return findChildByClass(JdlEnumTypeDefinition.class);
   }
 
 }

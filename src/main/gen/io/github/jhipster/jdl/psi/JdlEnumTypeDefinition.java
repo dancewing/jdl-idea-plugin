@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlEnumTypeDefinition extends PsiElement {
+public interface JdlEnumTypeDefinition extends JdlClass {
 
   @NotNull
-  JdlEnumTypeBody getEnumTypeBody();
+  JdlComponentName getComponentName();
+
+  @NotNull
+  List<JdlEnumConstantDeclaration> getEnumConstantDeclarationList();
 
 }

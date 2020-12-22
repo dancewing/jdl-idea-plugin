@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlApplicationTypeDefinition extends PsiElement {
+public interface JdlApplicationTypeDefinition extends JdlPsiCompositeElement {
 
-  @NotNull
+  @Nullable
   JdlApplicationTypeBody getApplicationTypeBody();
 
 }

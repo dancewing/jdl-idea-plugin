@@ -3,91 +3,90 @@ package io.github.jhipster.jdl.psi;
 
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiElement;
 
 public class JdlVisitor extends PsiElementVisitor {
 
-  public void visitApplicationType(@NotNull JdlApplicationType o) {
-    visitPsiElement(o);
+  public void visitApplicationEntities(@NotNull JdlApplicationEntities o) {
+    visitPsiCompositeElement(o);
   }
 
   public void visitApplicationTypeBody(@NotNull JdlApplicationTypeBody o) {
-    visitPsiElement(o);
+    visitPsiCompositeElement(o);
   }
 
   public void visitApplicationTypeBodyInner(@NotNull JdlApplicationTypeBodyInner o) {
-    visitPsiElement(o);
+    visitPsiCompositeElement(o);
   }
 
   public void visitApplicationTypeDefinition(@NotNull JdlApplicationTypeDefinition o) {
-    visitPsiElement(o);
+    visitPsiCompositeElement(o);
   }
 
-  public void visitDirectiveType(@NotNull JdlDirectiveType o) {
-    visitPsiElement(o);
+  public void visitComponentName(@NotNull JdlComponentName o) {
+    visitNamedElement(o);
   }
 
   public void visitDirectiveTypeBody(@NotNull JdlDirectiveTypeBody o) {
-    visitPsiElement(o);
+    visitPsiCompositeElement(o);
   }
 
   public void visitDirectiveTypeDefinition(@NotNull JdlDirectiveTypeDefinition o) {
-    visitPsiElement(o);
+    visitPsiCompositeElement(o);
   }
 
-  public void visitEntityName(@NotNull JdlEntityName o) {
-    visitPsiElement(o);
-  }
-
-  public void visitEntityType(@NotNull JdlEntityType o) {
-    visitPsiElement(o);
+  public void visitEntityNames(@NotNull JdlEntityNames o) {
+    visitPsiCompositeElement(o);
   }
 
   public void visitEntityTypeBody(@NotNull JdlEntityTypeBody o) {
-    visitPsiElement(o);
+    visitPsiCompositeElement(o);
   }
 
   public void visitEntityTypeBodyInner(@NotNull JdlEntityTypeBodyInner o) {
-    visitPsiElement(o);
+    visitPsiCompositeElement(o);
   }
 
   public void visitEntityTypeDefinition(@NotNull JdlEntityTypeDefinition o) {
-    visitPsiElement(o);
+    visitClass(o);
   }
 
   public void visitEntry(@NotNull JdlEntry o) {
-    visitPsiElement(o);
+    visitPsiCompositeElement(o);
   }
 
-  public void visitEntryItem(@NotNull JdlEntryItem o) {
-    visitPsiElement(o);
-  }
-
-  public void visitEnumType(@NotNull JdlEnumType o) {
-    visitPsiElement(o);
-  }
-
-  public void visitEnumTypeBody(@NotNull JdlEnumTypeBody o) {
-    visitPsiElement(o);
+  public void visitEnumConstantDeclaration(@NotNull JdlEnumConstantDeclaration o) {
+    visitComponent(o);
   }
 
   public void visitEnumTypeBodyInner(@NotNull JdlEnumTypeBodyInner o) {
-    visitPsiElement(o);
+    visitPsiCompositeElement(o);
   }
 
   public void visitEnumTypeDefinition(@NotNull JdlEnumTypeDefinition o) {
-    visitPsiElement(o);
+    visitClass(o);
   }
 
   public void visitFieldMember(@NotNull JdlFieldMember o) {
-    visitPsiElement(o);
+    visitComponent(o);
   }
 
   public void visitId(@NotNull JdlId o) {
-    visitPsiElement(o);
+    visitPsiCompositeElement(o);
   }
 
-  public void visitPsiElement(@NotNull PsiElement o) {
+  public void visitClass(@NotNull JdlClass o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitComponent(@NotNull JdlComponent o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitNamedElement(@NotNull JdlNamedElement o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitPsiCompositeElement(@NotNull JdlPsiCompositeElement o) {
     visitElement(o);
   }
 

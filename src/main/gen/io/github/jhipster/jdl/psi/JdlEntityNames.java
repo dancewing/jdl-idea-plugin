@@ -5,6 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlEntityName extends PsiElement {
+public interface JdlEntityNames extends JdlPsiCompositeElement {
+
+  @NotNull
+  List<JdlComponentName> getComponentNameList();
 
 }

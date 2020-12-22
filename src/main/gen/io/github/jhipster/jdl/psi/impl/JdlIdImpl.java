@@ -26,10 +26,4 @@ public class JdlIdImpl extends JdlPsiCompositeElementImpl implements JdlId {
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getIdentifier() {
-    return findNotNullChildByType(IDENTIFIER);
-  }
-
 }

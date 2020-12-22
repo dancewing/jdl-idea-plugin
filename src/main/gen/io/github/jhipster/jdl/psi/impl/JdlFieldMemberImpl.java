@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlFieldMemberImpl extends JdlPsiCompositeElementImpl implements JdlFieldMember {
+public class JdlFieldMemberImpl extends AbstractJdlComponentImpl implements JdlFieldMember {
 
   public JdlFieldMemberImpl(@NotNull ASTNode node) {
     super(node);
@@ -24,6 +24,12 @@ public class JdlFieldMemberImpl extends JdlPsiCompositeElementImpl implements Jd
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof JdlVisitor) accept((JdlVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public JdlComponentName getComponentName() {
+    return findNotNullChildByClass(JdlComponentName.class);
   }
 
 }

@@ -27,9 +27,9 @@ public class JdlDirectiveTypeDefinitionImpl extends JdlPsiCompositeElementImpl i
   }
 
   @Override
-  @NotNull
+  @Nullable
   public JdlDirectiveTypeBody getDirectiveTypeBody() {
-    return findNotNullChildByClass(JdlDirectiveTypeBody.class);
+    return findChildByClass(JdlDirectiveTypeBody.class);
   }
 
 }

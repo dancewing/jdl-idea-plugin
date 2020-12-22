@@ -1,40 +1,74 @@
-// Copyright 2000-2020 JetBrains s.r.o. and other contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-
 package io.github.jhipster.jdl;
 
-import com.intellij.lang.Commenter;
+import com.intellij.lang.CodeDocumentationAwareCommenter;
+import com.intellij.psi.PsiComment;
+import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.Nullable;
 
-public class JdlCommenter implements Commenter {
+public class JdlCommenter implements CodeDocumentationAwareCommenter {
 
-  @Nullable
   @Override
   public String getLineCommentPrefix() {
     return "//";
   }
 
-  @Nullable
   @Override
   public String getBlockCommentPrefix() {
     return "/*";
   }
 
-  @Nullable
   @Override
   public String getBlockCommentSuffix() {
     return "*/";
   }
 
-  @Nullable
   @Override
   public String getCommentedBlockCommentPrefix() {
     return null;
   }
 
-  @Nullable
   @Override
   public String getCommentedBlockCommentSuffix() {
     return null;
+  }
+
+  @Override
+  @Nullable
+  public IElementType getLineCommentTokenType() {
+    return JdlTokenTypes.SINGLE_LINE_COMMENT;
+  }
+
+  @Override
+  @Nullable
+  public IElementType getBlockCommentTokenType() {
+    return JdlTokenTypes.MULTI_LINE_COMMENT;
+  }
+
+  @Override
+  public String getDocumentationCommentPrefix() {
+    return "/**";
+  }
+
+  @Override
+  public String getDocumentationCommentLinePrefix() {
+    return "*";
+  }
+
+  @Override
+  public String getDocumentationCommentSuffix() {
+    return "*/";
+  }
+
+  @Override
+  public boolean isDocumentationComment(final PsiComment element) {
+    return element.getTokenType() == JdlTokenTypes.SINGLE_LINE_DOC_COMMENT ||
+        element.getTokenType() == JdlTokenTypes.MULTI_LINE_DOC_COMMENT;
+  }
+
+  @Override
+  @Nullable
+  public IElementType getDocumentationCommentTokenType() {
+    return JdlTokenTypes.SINGLE_LINE_DOC_COMMENT;
   }
 
 }

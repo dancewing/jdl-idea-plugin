@@ -27,9 +27,9 @@ public class JdlEntityTypeBodyImpl extends JdlPsiCompositeElementImpl implements
   }
 
   @Override
-  @NotNull
-  public List<JdlEntityTypeBodyInner> getEntityTypeBodyInnerList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlEntityTypeBodyInner.class);
+  @Nullable
+  public JdlEntityTypeBodyInner getEntityTypeBodyInner() {
+    return findChildByClass(JdlEntityTypeBodyInner.class);
   }
 
 }

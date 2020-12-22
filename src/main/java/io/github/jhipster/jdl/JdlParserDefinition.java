@@ -11,24 +11,27 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import io.github.jhipster.jdl.lexer.JdlLexer;
 import io.github.jhipster.jdl.parser.JdlParser;
 import io.github.jhipster.jdl.psi.JdlFile;
 import io.github.jhipster.jdl.psi.JdlTypes;
+import io.github.jhipster.jdl.psi.impl.JdlDocCommentImpl;
 import org.jetbrains.annotations.NotNull;
 
 public class JdlParserDefinition implements ParserDefinition {
 
   public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
-  public static final TokenSet COMMENTS = TokenSet.create(JdlTypes.COMMENT);
+  public static final TokenSet COMMENTS = JdlTokenTypes.COMMENTS;
 
   public static final IFileElementType FILE = new IFileElementType(JdlLanguage.INSTANCE);
 
   @NotNull
   @Override
   public Lexer createLexer(Project project) {
-    return new JdlLexerAdapter();
+    return new JdlLexer();
   }
 
   @NotNull
@@ -73,6 +76,8 @@ public class JdlParserDefinition implements ParserDefinition {
   @NotNull
   @Override
   public PsiElement createElement(ASTNode node) {
+    final IElementType type = node.getElementType();
+    if (type == JdlTokenTypes.MULTI_LINE_DOC_COMMENT) return new JdlDocCommentImpl(node);
     return JdlTypes.Factory.createElement(node);
   }
 

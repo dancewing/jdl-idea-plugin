@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlEntityTypeImpl extends JdlPsiCompositeElementImpl implements JdlEntityType {
+public class JdlEntityNamesImpl extends JdlPsiCompositeElementImpl implements JdlEntityNames {
 
-  public JdlEntityTypeImpl(@NotNull ASTNode node) {
+  public JdlEntityNamesImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull JdlVisitor visitor) {
-    visitor.visitEntityType(this);
+    visitor.visitEntityNames(this);
   }
 
   @Override
@@ -28,8 +28,8 @@ public class JdlEntityTypeImpl extends JdlPsiCompositeElementImpl implements Jdl
 
   @Override
   @NotNull
-  public JdlEntityTypeDefinition getEntityTypeDefinition() {
-    return findNotNullChildByClass(JdlEntityTypeDefinition.class);
+  public List<JdlComponentName> getComponentNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlComponentName.class);
   }
 
 }

@@ -26,4 +26,10 @@ public class JdlApplicationTypeBodyInnerImpl extends JdlPsiCompositeElementImpl 
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public JdlApplicationEntities getApplicationEntities() {
+    return findNotNullChildByClass(JdlApplicationEntities.class);
+  }
+
 }

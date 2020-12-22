@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlEnumTypeDefinitionImpl extends JdlPsiCompositeElementImpl implements JdlEnumTypeDefinition {
+public class JdlEnumTypeDefinitionImpl extends AbstractJdlPsiClass implements JdlEnumTypeDefinition {
 
   public JdlEnumTypeDefinitionImpl(@NotNull ASTNode node) {
     super(node);
@@ -28,8 +28,14 @@ public class JdlEnumTypeDefinitionImpl extends JdlPsiCompositeElementImpl implem
 
   @Override
   @NotNull
-  public JdlEnumTypeBody getEnumTypeBody() {
-    return findNotNullChildByClass(JdlEnumTypeBody.class);
+  public JdlComponentName getComponentName() {
+    return findNotNullChildByClass(JdlComponentName.class);
+  }
+
+  @Override
+  @NotNull
+  public List<JdlEnumConstantDeclaration> getEnumConstantDeclarationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlEnumConstantDeclaration.class);
   }
 
 }

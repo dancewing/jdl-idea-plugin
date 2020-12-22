@@ -27,9 +27,9 @@ public class JdlApplicationTypeBodyImpl extends JdlPsiCompositeElementImpl imple
   }
 
   @Override
-  @NotNull
+  @Nullable
   public JdlApplicationTypeBodyInner getApplicationTypeBodyInner() {
-    return findNotNullChildByClass(JdlApplicationTypeBodyInner.class);
+    return findChildByClass(JdlApplicationTypeBodyInner.class);
   }
 
 }

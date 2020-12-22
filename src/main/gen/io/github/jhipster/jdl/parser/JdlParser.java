@@ -36,74 +36,60 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // COMMENT? application_type_definition
-  public static boolean application_type(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "application_type")) return false;
+  // '*' | entity_names
+  public static boolean application_entities(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "application_entities")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, APPLICATION_TYPE, "<application type>");
-    r = application_type_0(b, l + 1);
-    r = r && application_type_definition(b, l + 1);
+    Marker m = enter_section_(b, l, _NONE_, APPLICATION_ENTITIES, "<application entities>");
+    r = consumeToken(b, MUL);
+    if (!r) r = entity_names(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // COMMENT?
-  private static boolean application_type_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "application_type_0")) return false;
-    consumeToken(b, COMMENT);
-    return true;
-  }
-
   /* ********************************************************** */
-  // application_type_body_inner {
-  // }
+  // '{' application_type_body_inner '}'
   public static boolean application_type_body(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "application_type_body")) return false;
+    if (!nextTokenIs(b, LBRACE)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, APPLICATION_TYPE_BODY, null);
+    r = consumeToken(b, LBRACE);
+    p = r; // pin = 1
+    r = r && report_error_(b, application_type_body_inner(b, l + 1));
+    r = p && consumeToken(b, RBRACE) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // application_entities
+  public static boolean application_type_body_inner(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "application_type_body_inner")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, APPLICATION_TYPE_BODY, "<application type body>");
-    r = application_type_body_inner(b, l + 1);
-    r = r && application_type_body_1(b, l + 1);
+    Marker m = enter_section_(b, l, _NONE_, APPLICATION_TYPE_BODY_INNER, "<application type body inner>");
+    r = application_entities(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // {
-  // }
-  private static boolean application_type_body_1(PsiBuilder b, int l) {
-    return true;
-  }
-
   /* ********************************************************** */
-  // ()
-  public static boolean application_type_body_inner(PsiBuilder b, int l) {
-    Marker m = enter_section_(b);
-    exit_section_(b, m, APPLICATION_TYPE_BODY_INNER, true);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // mb_blanks 'application' mb_blanks brace_start application_type_body brace_end {
-  // }
+  // 'application' application_type_body?
   public static boolean application_type_definition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "application_type_definition")) return false;
-    if (!nextTokenIsFast(b, BLANK) &&
-        !nextTokenIs(b, "<application type definition>", KW_APPLICATION)) return false;
+    if (!nextTokenIs(b, APPLICATION)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, APPLICATION_TYPE_DEFINITION, "<application type definition>");
-    r = mb_blanks(b, l + 1);
-    r = r && consumeToken(b, KW_APPLICATION);
-    r = r && mb_blanks(b, l + 1);
-    r = r && brace_start(b, l + 1);
-    r = r && application_type_body(b, l + 1);
-    r = r && brace_end(b, l + 1);
-    r = r && application_type_definition_6(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    Marker m = enter_section_(b);
+    r = consumeToken(b, APPLICATION);
+    r = r && application_type_definition_1(b, l + 1);
+    exit_section_(b, m, APPLICATION_TYPE_DEFINITION, r);
     return r;
   }
 
-  // {
-  // }
-  private static boolean application_type_definition_6(PsiBuilder b, int l) {
+  // application_type_body?
+  private static boolean application_type_definition_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "application_type_definition_1")) return false;
+    application_type_body(b, l + 1);
     return true;
   }
 
@@ -120,7 +106,7 @@ public class JdlParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = eof(b, l + 1);
-    if (!r) r = consumeToken(b, T_RBRACE);
+    if (!r) r = consumeToken(b, RBRACE);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -128,13 +114,25 @@ public class JdlParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // '{'
   static boolean brace_start(PsiBuilder b, int l) {
-    return consumeToken(b, T_LBRACE);
+    return consumeToken(b, LBRACE);
+  }
+
+  /* ********************************************************** */
+  // << nonStrictID >>
+  public static boolean componentName(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "componentName")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, COMPONENT_NAME, "<component name>");
+    r = nonStrictID(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */
   // 'service' | 'paginate' | 'microservice'
   static boolean directive_name(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directive_name")) return false;
+    if (!nextTokenIs(b, "", DIRECTIVE_MICROSERVICE, DIRECTIVE_PAGINATE, DIRECTIVE_SERVICE)) return false;
     boolean r;
     r = consumeToken(b, DIRECTIVE_SERVICE);
     if (!r) r = consumeToken(b, DIRECTIVE_PAGINATE);
@@ -143,145 +141,84 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // COMMENT? directive_type_definition
-  public static boolean directive_type(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "directive_type")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, DIRECTIVE_TYPE, "<directive type>");
-    r = directive_type_0(b, l + 1);
-    r = r && directive_type_definition(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // COMMENT?
-  private static boolean directive_type_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "directive_type_0")) return false;
-    consumeToken(b, COMMENT);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // enum_type_body_inner {
-  // }
+  // '{' '}'
   public static boolean directive_type_body(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "directive_type_body")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, DIRECTIVE_TYPE_BODY, "<directive type body>");
-    r = enum_type_body_inner(b, l + 1);
-    r = r && directive_type_body_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // {
-  // }
-  private static boolean directive_type_body_1(PsiBuilder b, int l) {
-    return true;
-  }
-
-  /* ********************************************************** */
-  // mb_blanks directive_name mb_blanks brace_start directive_type_body brace_end {
-  // }
-  public static boolean directive_type_definition(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "directive_type_definition")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, DIRECTIVE_TYPE_DEFINITION, "<directive type definition>");
-    r = mb_blanks(b, l + 1);
-    r = r && directive_name(b, l + 1);
-    r = r && mb_blanks(b, l + 1);
-    r = r && brace_start(b, l + 1);
-    r = r && directive_type_body(b, l + 1);
-    r = r && brace_end(b, l + 1);
-    r = r && directive_type_definition_6(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // {
-  // }
-  private static boolean directive_type_definition_6(PsiBuilder b, int l) {
-    return true;
-  }
-
-  /* ********************************************************** */
-  // UP_ID+
-  public static boolean entity_name(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "entity_name")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ENTITY_NAME, "<entity name>");
-    r = consumeToken(b, UP_ID);
-    while (r) {
-      int c = current_position_(b);
-      if (!consumeToken(b, UP_ID)) break;
-      if (!empty_element_parsed_guard_(b, "entity_name", c)) break;
-    }
-    exit_section_(b, l, m, r, false, JdlParser::entity_name_recover);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // !('{'|' ')
-  static boolean entity_name_recover(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "entity_name_recover")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
-    r = !entity_name_recover_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // '{'|' '
-  private static boolean entity_name_recover_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "entity_name_recover_0")) return false;
-    boolean r;
-    r = consumeToken(b, T_LBRACE);
-    if (!r) r = consumeToken(b, " ");
-    return r;
-  }
-
-  /* ********************************************************** */
-  // COMMENT? entity_type_definition
-  public static boolean entity_type(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "entity_type")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ENTITY_TYPE, "<entity type>");
-    r = entity_type_0(b, l + 1);
-    r = r && entity_type_definition(b, l + 1);
-    exit_section_(b, l, m, r, false, JdlParser::brace_end);
-    return r;
-  }
-
-  // COMMENT?
-  private static boolean entity_type_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "entity_type_0")) return false;
-    consumeToken(b, COMMENT);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // '{' entity_type_body_inner* '}'
-  public static boolean entity_type_body(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "entity_type_body")) return false;
-    if (!nextTokenIs(b, T_LBRACE)) return false;
+    if (!nextTokenIs(b, LBRACE)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, T_LBRACE);
-    r = r && entity_type_body_1(b, l + 1);
-    r = r && consumeToken(b, T_RBRACE);
-    exit_section_(b, m, ENTITY_TYPE_BODY, r);
+    r = consumeTokens(b, 0, LBRACE, RBRACE);
+    exit_section_(b, m, DIRECTIVE_TYPE_BODY, r);
     return r;
   }
 
-  // entity_type_body_inner*
-  private static boolean entity_type_body_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "entity_type_body_1")) return false;
+  /* ********************************************************** */
+  // directive_name directive_type_body?
+  public static boolean directive_type_definition(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "directive_type_definition")) return false;
+    if (!nextTokenIs(b, "<directive type definition>", DIRECTIVE_MICROSERVICE, DIRECTIVE_PAGINATE, DIRECTIVE_SERVICE)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, DIRECTIVE_TYPE_DEFINITION, "<directive type definition>");
+    r = directive_name(b, l + 1);
+    r = r && directive_type_definition_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // directive_type_body?
+  private static boolean directive_type_definition_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "directive_type_definition_1")) return false;
+    directive_type_body(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // componentName (',' componentName)*
+  public static boolean entity_names(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "entity_names")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ENTITY_NAMES, "<entity names>");
+    r = componentName(b, l + 1);
+    r = r && entity_names_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (',' componentName)*
+  private static boolean entity_names_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "entity_names_1")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!entity_type_body_inner(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "entity_type_body_1", c)) break;
+      if (!entity_names_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "entity_names_1", c)) break;
     }
     return true;
+  }
+
+  // ',' componentName
+  private static boolean entity_names_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "entity_names_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && componentName(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '{' entity_type_body_inner '}'
+  public static boolean entity_type_body(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "entity_type_body")) return false;
+    if (!nextTokenIs(b, LBRACE)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ENTITY_TYPE_BODY, null);
+    r = consumeToken(b, LBRACE);
+    p = r; // pin = 1
+    r = r && report_error_(b, entity_type_body_inner(b, l + 1));
+    r = p && consumeToken(b, RBRACE) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   /* ********************************************************** */
@@ -299,53 +236,43 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // mb_blanks 'entity' mb_blanks entity_name mb_blanks entity_type_body
+  // 'entity' componentName entity_type_body?
   public static boolean entity_type_definition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "entity_type_definition")) return false;
-    if (!nextTokenIsFast(b, BLANK) &&
-        !nextTokenIs(b, "<entity type definition>", KW_ENTITY)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ENTITY_TYPE_DEFINITION, "<entity type definition>");
-    r = mb_blanks(b, l + 1);
-    r = r && consumeToken(b, KW_ENTITY);
-    r = r && mb_blanks(b, l + 1);
-    r = r && entity_name(b, l + 1);
-    r = r && mb_blanks(b, l + 1);
-    r = r && entity_type_body(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
+    if (!nextTokenIs(b, ENTITY)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ENTITY_TYPE_DEFINITION, null);
+    r = consumeToken(b, ENTITY);
+    r = r && componentName(b, l + 1);
+    p = r; // pin = 2
+    r = r && entity_type_definition_2(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // entity_type_body?
+  private static boolean entity_type_definition_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "entity_type_definition_2")) return false;
+    entity_type_body(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
-  // application_type | entity_type | enum_type | directive_type
+  // application_type_definition | entity_type_definition | enum_type_definition | directive_type_definition
   public static boolean entry(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "entry")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ENTRY, "<entry>");
-    r = application_type(b, l + 1);
-    if (!r) r = entity_type(b, l + 1);
-    if (!r) r = enum_type(b, l + 1);
-    if (!r) r = directive_type(b, l + 1);
+    r = application_type_definition(b, l + 1);
+    if (!r) r = entity_type_definition(b, l + 1);
+    if (!r) r = enum_type_definition(b, l + 1);
+    if (!r) r = directive_type_definition(b, l + 1);
     exit_section_(b, l, m, r, false, JdlParser::entry_recover);
     return r;
   }
 
   /* ********************************************************** */
-  // entry*
-  public static boolean entry_item(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "entry_item")) return false;
-    Marker m = enter_section_(b, l, _NONE_, ENTRY_ITEM, "<entry item>");
-    while (true) {
-      int c = current_position_(b);
-      if (!entry(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "entry_item", c)) break;
-    }
-    exit_section_(b, l, m, true, false, null);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // !('application' | 'entity' |  'enum')
+  // !(<<nonStrictID>> | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice')
   static boolean entry_recover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "entry_recover")) return false;
     boolean r;
@@ -355,52 +282,31 @@ public class JdlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // 'application' | 'entity' |  'enum'
+  // <<nonStrictID>> | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice'
   private static boolean entry_recover_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "entry_recover_0")) return false;
     boolean r;
-    r = consumeToken(b, KW_APPLICATION);
-    if (!r) r = consumeToken(b, KW_ENTITY);
-    if (!r) r = consumeToken(b, KW_ENUM);
+    Marker m = enter_section_(b);
+    r = nonStrictID(b, l + 1);
+    if (!r) r = consumeToken(b, APPLICATION);
+    if (!r) r = consumeToken(b, ENTITY);
+    if (!r) r = consumeToken(b, ENUM);
+    if (!r) r = consumeToken(b, DIRECTIVE_SERVICE);
+    if (!r) r = consumeToken(b, DIRECTIVE_PAGINATE);
+    if (!r) r = consumeToken(b, DIRECTIVE_MICROSERVICE);
+    exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
-  // COMMENT? enum_type_definition
-  public static boolean enum_type(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "enum_type")) return false;
+  // componentName
+  public static boolean enumConstantDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enumConstantDeclaration")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ENUM_TYPE, "<enum type>");
-    r = enum_type_0(b, l + 1);
-    r = r && enum_type_definition(b, l + 1);
+    Marker m = enter_section_(b, l, _NONE_, ENUM_CONSTANT_DECLARATION, "<enum constant declaration>");
+    r = componentName(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
-  }
-
-  // COMMENT?
-  private static boolean enum_type_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "enum_type_0")) return false;
-    consumeToken(b, COMMENT);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // enum_type_body_inner {
-  // }
-  public static boolean enum_type_body(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "enum_type_body")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ENUM_TYPE_BODY, "<enum type body>");
-    r = enum_type_body_inner(b, l + 1);
-    r = r && enum_type_body_1(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // {
-  // }
-  private static boolean enum_type_body_1(PsiBuilder b, int l) {
-    return true;
   }
 
   /* ********************************************************** */
@@ -412,115 +318,125 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // mb_blanks 'enum' mb_blanks brace_start enum_type_body brace_end {
-  // }
+  // 'enum' componentName '{' enumConstantDeclaration (',' enumConstantDeclaration)* ','? '}'
   public static boolean enum_type_definition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enum_type_definition")) return false;
-    if (!nextTokenIsFast(b, BLANK) &&
-        !nextTokenIs(b, "<enum type definition>", KW_ENUM)) return false;
+    if (!nextTokenIs(b, ENUM)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, ENUM_TYPE_DEFINITION, null);
+    r = consumeToken(b, ENUM);
+    r = r && componentName(b, l + 1);
+    p = r; // pin = 2
+    r = r && report_error_(b, consumeToken(b, LBRACE));
+    r = p && report_error_(b, enumConstantDeclaration(b, l + 1)) && r;
+    r = p && report_error_(b, enum_type_definition_4(b, l + 1)) && r;
+    r = p && report_error_(b, enum_type_definition_5(b, l + 1)) && r;
+    r = p && consumeToken(b, RBRACE) && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // (',' enumConstantDeclaration)*
+  private static boolean enum_type_definition_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum_type_definition_4")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!enum_type_definition_4_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "enum_type_definition_4", c)) break;
+    }
+    return true;
+  }
+
+  // ',' enumConstantDeclaration
+  private static boolean enum_type_definition_4_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum_type_definition_4_0")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ENUM_TYPE_DEFINITION, "<enum type definition>");
-    r = mb_blanks(b, l + 1);
-    r = r && consumeToken(b, KW_ENUM);
-    r = r && mb_blanks(b, l + 1);
-    r = r && brace_start(b, l + 1);
-    r = r && enum_type_body(b, l + 1);
-    r = r && brace_end(b, l + 1);
-    r = r && enum_type_definition_6(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && enumConstantDeclaration(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 
-  // {
-  // }
-  private static boolean enum_type_definition_6(PsiBuilder b, int l) {
+  // ','?
+  private static boolean enum_type_definition_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum_type_definition_5")) return false;
+    consumeToken(b, COMMA);
     return true;
   }
 
   /* ********************************************************** */
-  // mb_nl COMMENT? mb_nl field_name mb_blanks field_type mb_blanks field_validation?
+  // field_type componentName field_validation?
   public static boolean field_member(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "field_member")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, FIELD_MEMBER, "<field member>");
-    r = mb_nl(b, l + 1);
-    r = r && field_member_1(b, l + 1);
-    r = r && mb_nl(b, l + 1);
-    r = r && field_name(b, l + 1);
-    r = r && mb_blanks(b, l + 1);
-    r = r && field_type(b, l + 1);
-    r = r && mb_blanks(b, l + 1);
-    r = r && field_member_7(b, l + 1);
-    exit_section_(b, l, m, r, false, JdlParser::brace_end);
+    r = field_type(b, l + 1);
+    r = r && componentName(b, l + 1);
+    r = r && field_member_2(b, l + 1);
+    exit_section_(b, l, m, r, false, JdlParser::field_member_recover);
     return r;
   }
 
-  // COMMENT?
-  private static boolean field_member_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "field_member_1")) return false;
-    consumeToken(b, COMMENT);
-    return true;
-  }
-
   // field_validation?
-  private static boolean field_member_7(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "field_member_7")) return false;
+  private static boolean field_member_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "field_member_2")) return false;
     field_validation(b, l + 1);
     return true;
   }
 
   /* ********************************************************** */
-  // LOW_ID+
-  static boolean field_name(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "field_name")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = consumeToken(b, LOW_ID);
-    while (r) {
-      int c = current_position_(b);
-      if (!consumeToken(b, LOW_ID)) break;
-      if (!empty_element_parsed_guard_(b, "field_name", c)) break;
-    }
-    exit_section_(b, l, m, r, false, JdlParser::field_name_recover);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // !(field_type)
-  static boolean field_name_recover(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "field_name_recover")) return false;
+  // !(<<nonStrictID>> | field_type | '}' )
+  static boolean field_member_recover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "field_member_recover")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NOT_);
-    r = !field_name_recover_0(b, l + 1);
+    r = !field_member_recover_0(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // (field_type)
-  private static boolean field_name_recover_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "field_name_recover_0")) return false;
+  // <<nonStrictID>> | field_type | '}'
+  private static boolean field_member_recover_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "field_member_recover_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = field_type(b, l + 1);
+    r = nonStrictID(b, l + 1);
+    if (!r) r = field_type(b, l + 1);
+    if (!r) r = consumeToken(b, RBRACE);
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
-  // 'String' | 'Integer'
+  // 'String' | 'Integer' | 'Long' | 'BigDecimal' | 'Float' | 'Double' | 'Enum' | 'Boolean' | 'LocalDate' | 'ZonedDateTime' | 'Blob' | 'AnyBlob' | 'ImageBlob' | 'TextBlob'
   static boolean field_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "field_type")) return false;
-    if (!nextTokenIs(b, "", NUM_INT, NUM_STRING)) return false;
+    if (!nextTokenIs(b, "", NUM_ANY_BLOB, NUM_BIG_DECIMAL,
+      NUM_BLOB, NUM_BOOELAN, NUM_DOUBLE, NUM_ENUM, NUM_FLOAT, NUM_IMAGE_BLOB,
+      NUM_INT, NUM_LOCAL_DATE, NUM_LONG, NUM_STRING, NUM_TEXT_BLOB, NUM_ZONED_DATE_TIME)) return false;
     boolean r;
     r = consumeToken(b, NUM_STRING);
     if (!r) r = consumeToken(b, NUM_INT);
+    if (!r) r = consumeToken(b, NUM_LONG);
+    if (!r) r = consumeToken(b, NUM_BIG_DECIMAL);
+    if (!r) r = consumeToken(b, NUM_FLOAT);
+    if (!r) r = consumeToken(b, NUM_DOUBLE);
+    if (!r) r = consumeToken(b, NUM_ENUM);
+    if (!r) r = consumeToken(b, NUM_BOOELAN);
+    if (!r) r = consumeToken(b, NUM_LOCAL_DATE);
+    if (!r) r = consumeToken(b, NUM_ZONED_DATE_TIME);
+    if (!r) r = consumeToken(b, NUM_BLOB);
+    if (!r) r = consumeToken(b, NUM_ANY_BLOB);
+    if (!r) r = consumeToken(b, NUM_IMAGE_BLOB);
+    if (!r) r = consumeToken(b, NUM_TEXT_BLOB);
     return r;
   }
 
   /* ********************************************************** */
   // 'required'
   static boolean field_validation(PsiBuilder b, int l) {
-    return consumeToken(b, V_REQUIRED);
+    return consumeToken(b, REQUIRED);
   }
 
   /* ********************************************************** */
@@ -536,12 +452,12 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // entry_item*
+  // entry*
   static boolean jdlFile(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "jdlFile")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!entry_item(b, l + 1)) break;
+      if (!entry(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "jdlFile", c)) break;
     }
     return true;
@@ -565,33 +481,6 @@ public class JdlParser implements PsiParser, LightPsiParser {
       if (!empty_element_parsed_guard_(b, "mb_nl", c)) break;
     }
     return true;
-  }
-
-  /* ********************************************************** */
-  // <<something>> | <<withProtectedLastVariantPos (nls <<something>>)>>
-  static boolean mb_nl_group(PsiBuilder b, int l, Parser _something) {
-    if (!recursion_guard_(b, l, "mb_nl_group")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = _something.parse(b, l);
-    if (!r) r = withProtectedLastVariantPos(b, l + 1, mb_nl_group_1_0_$(_something));
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  private static Parser mb_nl_group_1_0_$(Parser _something) {
-    return (b, l) -> mb_nl_group_1_0(b, l + 1, _something);
-  }
-
-  // nls <<something>>
-  private static boolean mb_nl_group_1_0(PsiBuilder b, int l, Parser _something) {
-    if (!recursion_guard_(b, l, "mb_nl_group_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = nls(b, l + 1);
-    r = r && _something.parse(b, l);
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   /* ********************************************************** */
@@ -630,73 +519,12 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<separated_item_head <<item_end>> <<element>> <<separated_recovery <<element_start>> <<item_end>>>>>> <<item_end>>
-  static boolean separated_item(PsiBuilder b, int l, Parser _item_end, Parser _element, Parser _element_start) {
-    if (!recursion_guard_(b, l, "separated_item")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = separated_item_head(b, l + 1, _item_end, _element, separated_recovery_$(_element_start, _item_end));
-    p = r; // pin = 1
-    r = r && _item_end.parse(b, l);
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  /* ********************************************************** */
-  // !<<item_end>> <<element>>
-  static boolean separated_item_head(PsiBuilder b, int l, Parser _item_end, Parser _element, Parser _separated_recovery) {
-    if (!recursion_guard_(b, l, "separated_item_head")) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = separated_item_head_0(b, l + 1, _item_end, _separated_recovery);
-    p = r; // pin = 1
-    r = r && _element.parse(b, l);
-    exit_section_(b, l, m, r, p, _separated_recovery);
-    return r || p;
-  }
-
-  // !<<item_end>>
-  private static boolean separated_item_head_0(PsiBuilder b, int l, Parser _item_end, Parser _separated_recovery) {
-    if (!recursion_guard_(b, l, "separated_item_head_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
-    r = !_item_end.parse(b, l);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  static Parser separated_recovery_$(Parser _item_end, Parser _element_start) {
-    return (b, l) -> separated_recovery(b, l + 1, _item_end, _element_start);
-  }
-
-  // !(<<item_end>> | <<element_start>>)
-  static boolean separated_recovery(PsiBuilder b, int l, Parser _item_end, Parser _element_start) {
-    if (!recursion_guard_(b, l, "separated_recovery")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
-    r = !separated_recovery_0(b, l + 1, _item_end, _element_start);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // <<item_end>> | <<element_start>>
-  private static boolean separated_recovery_0(PsiBuilder b, int l, Parser _item_end, Parser _element_start) {
-    if (!recursion_guard_(b, l, "separated_recovery_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = _item_end.parse(b, l);
-    if (!r) r = _element_start.parse(b, l);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // ',' | NL
   static boolean separator(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "separator")) return false;
+    if (!nextTokenIs(b, "", COMMA, NL)) return false;
     boolean r;
-    r = consumeToken(b, ",");
+    r = consumeToken(b, COMMA);
     if (!r) r = consumeToken(b, NL);
     return r;
   }
@@ -705,6 +533,7 @@ public class JdlParser implements PsiParser, LightPsiParser {
   // separator+
   static boolean separators(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "separators")) return false;
+    if (!nextTokenIs(b, "", COMMA, NL)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = separator(b, l + 1);
@@ -723,7 +552,7 @@ public class JdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "simple_scope_recover")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NOT_);
-    r = !consumeToken(b, T_RBRACE);
+    r = !consumeToken(b, RBRACE);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

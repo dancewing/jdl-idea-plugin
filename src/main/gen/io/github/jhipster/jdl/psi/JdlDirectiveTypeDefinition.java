@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlDirectiveTypeDefinition extends PsiElement {
+public interface JdlDirectiveTypeDefinition extends JdlPsiCompositeElement {
 
-  @NotNull
+  @Nullable
   JdlDirectiveTypeBody getDirectiveTypeBody();
 
 }

@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlDirectiveType extends PsiElement {
+public interface JdlEnumConstantDeclaration extends JdlComponent {
 
   @NotNull
-  JdlDirectiveTypeDefinition getDirectiveTypeDefinition();
+  JdlComponentName getComponentName();
 
 }

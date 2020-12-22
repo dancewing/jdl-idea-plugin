@@ -26,10 +26,4 @@ public class JdlDirectiveTypeBodyImpl extends JdlPsiCompositeElementImpl impleme
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public JdlEnumTypeBodyInner getEnumTypeBodyInner() {
-    return findNotNullChildByClass(JdlEnumTypeBodyInner.class);
-  }
-
 }
