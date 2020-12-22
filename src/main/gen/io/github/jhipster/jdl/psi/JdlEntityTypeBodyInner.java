@@ -5,6 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlEntityTypeBodyInner extends PsiElement {
+public interface JdlEntityTypeBodyInner extends JdlPsiCompositeElement {
+
+  @NotNull
+  List<JdlFieldMember> getFieldMemberList();
 
 }

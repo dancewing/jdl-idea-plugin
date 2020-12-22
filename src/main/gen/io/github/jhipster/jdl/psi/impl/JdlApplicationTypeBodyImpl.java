@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlApplicationTypeBodyImpl extends ASTWrapperPsiElement implements JdlApplicationTypeBody {
+public class JdlApplicationTypeBodyImpl extends JdlPsiCompositeElementImpl implements JdlApplicationTypeBody {
 
   public JdlApplicationTypeBodyImpl(@NotNull ASTNode node) {
     super(node);
@@ -28,9 +27,9 @@ public class JdlApplicationTypeBodyImpl extends ASTWrapperPsiElement implements 
   }
 
   @Override
-  @NotNull
+  @Nullable
   public JdlApplicationTypeBodyInner getApplicationTypeBodyInner() {
-    return findNotNullChildByClass(JdlApplicationTypeBodyInner.class);
+    return findChildByClass(JdlApplicationTypeBodyInner.class);
   }
 
 }

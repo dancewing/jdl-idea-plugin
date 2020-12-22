@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlEntityTypeDefinition extends PsiElement {
+public interface JdlEntityTypeDefinition extends JdlClass {
 
   @NotNull
+  JdlComponentName getComponentName();
+
+  @Nullable
   JdlEntityTypeBody getEntityTypeBody();
 
 }

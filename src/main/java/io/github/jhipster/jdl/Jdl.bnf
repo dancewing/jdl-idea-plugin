@@ -1,9 +1,12 @@
-// Copyright 2000-2020 JetBrains s.r.o. and other contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 {
+  psiImplUtilClass="io.github.jhipster.jdl.psi.impl.JdlPsiImplUtil"
+
   parserClass="io.github.jhipster.jdl.parser.JdlParser"
   parserUtilClass="io.github.jhipster.jdl.parser.JdlParserUtil"
 
-  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  implements="io.github.jhipster.jdl.psi.JdlPsiCompositeElement"
+  extends="io.github.jhipster.jdl.psi.impl.JdlPsiCompositeElementImpl"
 
   psiClassPrefix="Jdl"
   psiImplClassSuffix="Impl"
@@ -12,21 +15,271 @@
 
   elementTypeHolderClass="io.github.jhipster.jdl.psi.JdlTypes"
   elementTypeClass="io.github.jhipster.jdl.psi.JdlElementType"
+  elementTypePrefix=""
   tokenTypeClass="io.github.jhipster.jdl.psi.JdlTokenType"
 
-  psiImplUtilClass="io.github.jhipster.jdl.psi.impl.JdlPsiImplUtil"
+  generateFirstCheck=50
+
+//  mixin("string_literal_expression")="org.intellij.grammar.psi.impl.BnfStringImpl"
+//  implements("value") = "io.github.jhipster.jdl.psi.JdlNamedElement"
+//  extends("value") = "io.github.jhipster.jdl.psi.impl.JdlNamedElementImpl"
+
+  tokens = [
+
+    AP_ENTITIES = 'entities'
+    AP_CONFIG = 'config'
+
+    DIRECTIVE_SERVICE = 'service';
+    DIRECTIVE_PAGINATE = 'paginate';
+    DIRECTIVE_MICROSERVICE = 'microservice';
+
+    SH_COMMENT = 'shell comment'
+    SL_COMMENT = 'line comment'
+    ML_COMMENT = 'block comment'
+
+    BLANK = 'regexp:\s'
+
+    NL = 'regexp:(\n)*'
+    //NL = 'new line'
+    //string="regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\\'|\\)*\")"
+    //id='regexp:\p{Alpha}\w*'
+    //id="regexp:\w+"
+    UP_ID="regexp:[A-Z]+[a-zA-Z0-9]*"
+    LOW_ID="regexp:[a-z]+[a-zA-Z0-9]*"
+
+    //IDENTIFIER = 'regexp:[a-zA-Z][a-zA-Z0-9]*'
+
+    T_RBRACE = '}'
+    T_LPAREN = '('
+    T_RPAREN = ')'
+    T_LBRACK = '['
+    T_RBRACK = ']'
+    T_LBRACE = '{'
+
+    LINEFEED = '\n'
+
+    NUM_STRING = 'String'
+    NUM_INT = 'Integer'
+    NUM_LONG = 'Long'
+    NUM_BIG_DECIMAL = 'BigDecimal'
+    NUM_FLOAT = 'Float'
+    NUM_DOUBLE = 'Double'
+    NUM_ENUM = 'Enum'
+    NUM_BOOELAN = 'Boolean'
+    NUM_LOCAL_DATE = 'LocalDate'
+    NUM_ZONED_DATE_TIME = 'ZonedDateTime'
+    NUM_BLOB = 'Blob'
+    NUM_ANY_BLOB = 'AnyBlob'
+    NUM_IMAGE_BLOB = 'ImageBlob'
+    NUM_TEXT_BLOB = 'TextBlob'
+
+    T_WRONG = 'wrong token'
+
+    // reserved words
+      APPLICATION = 'application'
+      ASSERT="assert"
+      BREAK="break"
+      CASE="case"
+      CATCH="catch"
+      CLASS="class"
+
+      CONST="const"
+      CONTINUE="continue"
+      DEFAULT="default"
+      DO="do"
+      ELSE="else"
+      ENUM="enum"
+      ENTITY = "entity"
+      EXTENDS="extends"
+      FALSE="false"
+      FINAL="final"
+      FINALLY="finally"
+      FOR="for"
+      IF="if"
+      IN="in"
+      IS="is"
+      NEW="new"
+      NULL="null"
+      RETHROW="rethrow"
+      RETURN="return"
+      SUPER="super"
+      SWITCH="switch"
+      THIS="this"
+      THROW="throw"
+      TRUE="true"
+      TRY="try"
+      VAR="var"
+      VOID="void"
+      WHILE="while"
+      WITH="with"
+
+    // BUILT_IN_IDENTIFIER
+      ABSTRACT="abstract"
+      AS="as"
+      COVARIANT="covariant"
+      DEFERRED="deferred"
+      EXPORT="export"
+      EXTENSION="extension"
+      EXTERNAL="external"
+      FACTORY="factory"
+      GET="get"
+      IMPLEMENTS="implements"
+      IMPORT="import"
+      LIBRARY="library"
+      MIXIN="mixin"
+      OPERATOR="operator"
+      PART="part"
+      SET="set"
+      STATIC="static"
+      TYPEDEF="typedef"
+
+    // other
+      ON="on"
+      OF="of"
+      NATIVE="native"
+      SHOW="show"
+      HIDE="hide"
+      SYNC="sync"
+      ASYNC="async"
+      AWAIT="await"
+      YIELD="yield"
+      LATE="late"
+      REQUIRED="required"
+
+      LBRACE="{"
+      RBRACE="}"
+      LBRACKET="["
+      RBRACKET="]"
+      LPAREN="("
+      RPAREN=")"
+      SEMICOLON=";"
+      MINUS="-"
+      MINUS_EQ="-="
+      MINUS_MINUS="--"
+      PLUS="+"
+      PLUS_PLUS="++"
+      PLUS_EQ="+="
+      DIV="/"
+      DIV_EQ="/="
+      MUL="*"
+      MUL_EQ="*="
+      INT_DIV="~/"
+      INT_DIV_EQ="~/="
+      REM_EQ="%="
+      REM="%"
+      BIN_NOT="~"
+      NOT="!"
+
+      EXPRESSION_BODY_DEF="=>"
+      EQ="="
+      EQ_EQ="=="
+      NEQ="!="
+      DOT="."
+      DOT_DOT=".."
+      QUEST_DOT_DOT="?.."
+      DOT_DOT_DOT="..."
+      DOT_DOT_DOT_QUEST="...?"
+      COMMA=","
+      COLON=":"
+      GT=">"
+      GT_EQ=">="
+      GT_GT=">>"
+      GT_GT_EQ=">>="
+      LT="<"
+      LT_EQ="<="
+      LT_LT="<<"
+      LT_LT_EQ="<<="
+      OR="|"
+      OR_EQ="|="
+      OR_OR="||"
+      OR_OR_EQ="||="
+      QUEST="?"
+      QUEST_DOT="?."
+      QUEST_QUEST="??"
+      QUEST_QUEST_EQ="??="
+      XOR="^"
+      XOR_EQ="^="
+      AND="&"
+      AND_EQ="&="
+      AND_AND="&&"
+      AND_AND_EQ="&&="
+      HASH="#"
+      AT="@"
+  ]
 }
 
-simpleFile ::= item_*
+jdlFile ::= entry*
 
-private item_ ::= (property|COMMENT|CRLF)
+entry ::= application_type_definition | entity_type_definition | enum_type_definition | directive_type_definition {
+  recoverWhile = entry_recover
+}
+private entry_recover ::= !(<<nonStrictID>> | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice')
 
-property ::= (KEY? SEPARATOR VALUE?) | KEY {
-  pin=3
-  recoverWhile="recover_property"
-  mixin="io.github.jhipster.jdl.psi.impl.JdlNamedElementImpl"
-  implements="io.github.jhipster.jdl.psi.JdlNamedElement"
-  methods=[getKey getValue getName setName getNameIdentifier getPresentation]
+application_type_definition ::= 'application' application_type_body?
+
+application_type_body ::= '{' application_type_body_inner '}' {pin=1}
+
+application_type_body_inner ::= application_entities
+
+application_entities ::= '*' | entity_names
+
+entity_names ::= componentName (',' componentName)*
+
+entity_type_definition ::= 'entity' componentName entity_type_body?
+{pin=2  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlPsiClass" implements="io.github.jhipster.jdl.psi.JdlClass"}
+
+componentName ::= << nonStrictID >> {mixin="io.github.jhipster.jdl.psi.impl.JdlNamedElementImpl" implements="io.github.jhipster.jdl.psi.JdlNamedElement"}
+
+entity_type_body ::= '{' entity_type_body_inner '}' {pin = 1}
+
+entity_type_body_inner ::= field_member* {
+  recoverWhile = simple_scope_recover
 }
 
-private recover_property ::= !(KEY|SEPARATOR|COMMENT)
+field_member ::=  field_type componentName field_validation?
+{recoverWhile="field_member_recover" mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
+
+private field_member_recover ::= !(<<nonStrictID>> | field_type | '}' )
+
+private field_type ::= 'String' | 'Integer' | 'Long' | 'BigDecimal' | 'Float' | 'Double' | 'Enum' | 'Boolean' | 'LocalDate' | 'ZonedDateTime' | 'Blob' | 'AnyBlob' | 'ImageBlob' | 'TextBlob'
+private field_validation ::= 'required'
+
+//private entity_names ::= entity_name (',' entity_name)*
+
+enum_type_body_inner ::= ()
+
+enum_type_definition ::= 'enum' componentName '{' enumConstantDeclaration (',' enumConstantDeclaration)* ','? '}'
+{pin=2  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlPsiClass" implements="io.github.jhipster.jdl.psi.JdlClass"}
+
+enumConstantDeclaration ::= componentName
+{mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
+
+//
+directive_type_definition ::= directive_name directive_type_body?
+
+private directive_name ::= ('service' | 'paginate' | 'microservice')
+
+directive_type_body ::= '{' '}'
+
+private blank ::= BLANK { consumeTokenMethod = 'consumeTokenFast' }
+private mb_blanks ::= blank?
+
+private brace_end ::= <<eof>> | '}'
+private brace_start ::= '{'
+
+private simple_scope_recover ::= !'}'
+
+// see nonStrictID
+id ::= IDENTIFIER
+
+private mb_nl ::= nl*
+private nls ::= nl+
+private nl ::= NL { consumeTokenMethod = 'consumeTokenFast' }
+
+private separator ::= ',' | NL
+private separators ::= separator+
+private mb_separators ::= separator*
+
+private external clear_error ::= clearError
+
+private external end_of_file ::= !<<eof>>
