@@ -28,8 +28,20 @@ public class JdlFieldMemberImpl extends AbstractJdlComponentImpl implements JdlF
 
   @Override
   @NotNull
-  public JdlComponentName getComponentName() {
-    return findNotNullChildByClass(JdlComponentName.class);
+  public JdlFieldName getFieldName() {
+    return findNotNullChildByClass(JdlFieldName.class);
+  }
+
+  @Override
+  @NotNull
+  public JdlFieldTypeDefinition getFieldTypeDefinition() {
+    return findNotNullChildByClass(JdlFieldTypeDefinition.class);
+  }
+
+  @Override
+  @NotNull
+  public List<JdlMetadata> getMetadataList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlMetadata.class);
   }
 
 }

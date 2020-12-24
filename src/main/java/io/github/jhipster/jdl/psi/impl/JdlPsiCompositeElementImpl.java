@@ -2,17 +2,15 @@ package io.github.jhipster.jdl.psi.impl;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.scope.PsiScopeProcessor;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
+import io.github.jhipster.jdl.JdlComponentType;
+import io.github.jhipster.jdl.psi.JdlComponent;
 import io.github.jhipster.jdl.psi.JdlPsiCompositeElement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class JdlPsiCompositeElementImpl extends ASTWrapperPsiElement implements JdlPsiCompositeElement {
 
@@ -34,15 +32,14 @@ public class JdlPsiCompositeElementImpl extends ASTWrapperPsiElement implements 
   @Override
   public SearchScope getUseScope() {
     // LocalSearchScope enables in-place rename. See DartRefactoringSupportProvider.isInplaceRenameAvailable() and its usages.
-//    DartComponentType type = DartComponentType.typeOf(this);
-//    if (type == DartComponentType.LOCAL_VARIABLE) {
-//      // this -> name, parent -> component, but we need next component up the tree.
-//      DartComponent parentComponent = PsiTreeUtil.getParentOfType(getParent(), DartComponent.class);
-//      return new LocalSearchScope(parentComponent != null ? parentComponent : getContainingFile());
-//    }
-//    // too large scope doesn't affect performance (usages are searched via Analysis Server) but helps to solve corner cases
-//    return GlobalSearchScope.allScope(getProject());
-    return null;
+    JdlComponentType type = JdlComponentType.typeOf(this);
+    if (type == JdlComponentType.LOCAL_VARIABLE) {
+      // this -> name, parent -> component, but we need next component up the tree.
+      JdlComponent parentComponent = PsiTreeUtil.getParentOfType(getParent(), JdlComponent.class);
+      return new LocalSearchScope(parentComponent != null ? parentComponent : getContainingFile());
+    }
+    // too large scope doesn't affect performance (usages are searched via Analysis Server) but helps to solve corner cases
+    return GlobalSearchScope.allScope(getProject());
   }
 //
 //  @Override

@@ -40,6 +40,7 @@
               language="Jdl" extensions="jdl"/>
     <lang.syntaxHighlighter language="Jdl" implementationClass="io.github.jhipster.jdl.highlight.JdlSyntaxHighlighter"/>
     <highlightErrorFilter implementation="io.github.jhipster.jdl.highlight.JdlHighlightingErrorFilter"/>
+    <colorSettingsPage implementation="io.github.jhipster.jdl.highlight.JdlColorsAndFontsPage"/>
 
     <lang.braceMatcher language="Jdl" implementationClass="io.github.jhipster.jdl.ide.JdlBraceMatcher"/>
 
@@ -53,4 +54,9 @@
     <lang.commenter language="Jdl" implementationClass="io.github.jhipster.jdl.JdlCommenter"/>
   </extensions>
 
+  <actions>
+    <action id="Jdl.NewJdlFile" class="io.github.jhipster.jdl.ide.actions.CreateJdlFileAction">
+      <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
+    </action>
+  </actions>
 </idea-plugin>

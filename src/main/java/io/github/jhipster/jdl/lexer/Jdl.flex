@@ -61,6 +61,7 @@ import static io.github.jhipster.jdl.psi.JdlTypes.*;
 
 %xstate MULTI_LINE_COMMENT_STATE QUO_STRING THREE_QUO_STRING APOS_STRING THREE_APOS_STRING SHORT_TEMPLATE_ENTRY LONG_TEMPLATE_ENTRY
 
+PATTERN=\/[^*].*\/
 DIGIT=[0-9]
 HEX_DIGIT=[0-9a-fA-F]
 LETTER=[a-z]|[A-Z]
@@ -87,14 +88,16 @@ THREE_APOS = (\'\'\')
 SHORT_TEMPLATE_ENTRY=\${IDENTIFIER_NO_DOLLAR}
 
 IDENTIFIER_START_NO_DOLLAR={LETTER}|"_"
-IDENTIFIER_START={IDENTIFIER_START_NO_DOLLAR}|"$"
+IDENTIFIER_START={IDENTIFIER_START_NO_DOLLAR}
 IDENTIFIER_PART_NO_DOLLAR={IDENTIFIER_START_NO_DOLLAR}|{DIGIT}
 IDENTIFIER_PART={IDENTIFIER_START}|{DIGIT}
 IDENTIFIER={IDENTIFIER_START}{IDENTIFIER_PART}*
 IDENTIFIER_NO_DOLLAR={IDENTIFIER_START_NO_DOLLAR}{IDENTIFIER_PART_NO_DOLLAR}*
 
-//NUMERIC_LITERAL = {NUMBER} | {HEX_NUMBER}
-//NUMBER = ({DIGIT}+ ("." {DIGIT}+)? {EXPONENT}?) | ("." {DIGIT}+ {EXPONENT}?)
+PACKAGE_NAME= ({IDENTIFIER}+("."{IDENTIFIER})*)
+
+NUMERIC_LITERAL = {NUMBER} | {HEX_NUMBER}
+NUMBER = ({DIGIT}+ ("." {DIGIT}+)? {EXPONENT}?) | ("." {DIGIT}+ {EXPONENT}?)
 EXPONENT = [Ee] ["+""-"]? {DIGIT}*
 HEX_NUMBER = 0 [Xx] {HEX_DIGIT}*
 
@@ -136,6 +139,7 @@ HEX_NUMBER = 0 [Xx] {HEX_DIGIT}*
 // reserved words
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "assert"               { return ASSERT; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "application"          { return APPLICATION; } //add
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "relationship"         { return RELATIONSHIP; } //add
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "break"                { return BREAK; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "case"                 { return CASE; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "catch"                { return CATCH; }
@@ -197,9 +201,78 @@ HEX_NUMBER = 0 [Xx] {HEX_DIGIT}*
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "await"                { return AWAIT; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "yield"                { return YIELD; }
 
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "microservice"         { return DIRECTIVE_MICROSERVICE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "paginate"             { return DIRECTIVE_PAGINATE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "service"              { return DIRECTIVE_SERVICE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "microservice"         { return OPTION_MICRO_SERVICE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "paginate"             { return OPTION_PAGINATE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "service"              { return OPTION_SERVICE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipClient"           { return OPTION_SKIP_CLIENT; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipServer"           { return OPTION_SKIP_SERVER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "noFluentMethod"       { return OPTION_NO_FLUENT_METHOD; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "filter"               { return OPTION_FILTER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "readOnly"             { return OPTION_READONLY; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "dto"                  { return OPTION_DTO; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "search"               { return OPTION_SEARCH; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "angularSuffix"        { return OPTION_ANGULAR_SUFFIX; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "clientRootFolder"     { return OPTION_CLIENT_ROOT_FOLDER; }
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "baseName"               { return CFG_BASE_NAME; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "applicationType"        { return CFG_APPLICATION_TYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "packageName"            { return CFG_PACKAGE_NAME; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "serviceDiscoveryType"   { return CFG_SERVICE_DISCOVERY_TYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "authenticationType"     { return CFG_AUTHENTICATION_TYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "databaseType"           { return CFG_DATABASE_TYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "prodDatabaseType"       { return CFG_PROD_DATABASE_TYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "devDatabaseType"        { return CFG_DEV_DATABASE_TYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "cacheProvider"          { return CFG_CACHE_PROVIDER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "enableHibernateCache"   { return CFG_ENABLE_HIBERNATE_CACHE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "buildTool"              { return CFG_BUILD_TOOL; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "clientFramework"        { return CFG_CLIENT_FRAMEWORK; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "useSass"                { return CFG_USE_SASS; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "testFrameworks"         { return CFG_TEST_FRAMEWORKS; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "serverPort"             { return CFG_SERVER_PORT; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipUserManagement"     { return CFG_SKIP_USER_MANAGEMENT; }
+/*
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "gateway"              { return CFG_OPTION_GATEWAY; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "monolith"             { return CFG_OPTION_MONOLITH; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "microservice"         { return CFG_OPTION_MICROSERVICE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "uaa"                  { return CFG_OPTION_UAA; }
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "eureka"             { return CFG_OPTION_EUREKA; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "consul"             { return CFG_OPTION_CONSUL; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "nacos"              { return CFG_OPTION_NACOS; }
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "jwt"                 { return CFG_OPTION_JWT; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "oauth2"              { return CFG_OPTION_OAUTH2; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "session"             { return CFG_OPTION_SESSION; }
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "sql"                 { return CFG_OPTION_SQL; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "mongodb"             { return CFG_OPTION_MONGODB; }
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "mysql"               { return CFG_OPTION_MYSQL; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "mariadb"             { return CFG_OPTION_MARIADB; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "postgresql"          { return CFG_OPTION_POSTGRESQL; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "oracle"              { return CFG_OPTION_ORACLE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "mssql"               { return CFG_OPTION_MSSQL; }
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "ehcache"             { return CFG_OPTION_EHCACHE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "caffeine"            { return CFG_OPTION_CAFFEINE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "hazelcast"           { return CFG_OPTION_HAZELCAST; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "infinispan"          { return CFG_OPTION_INFINISPAN; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "memcached"           { return CFG_OPTION_MEMCACHED; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "redis"               { return CFG_OPTION_REDIS; }
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "maven"               { return CFG_OPTION_MAVEN; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "gradle"              { return CFG_OPTION_GRADLE; }
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "angularX"            { return CFG_OPTION_ANGULARX; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "vue"                 { return CFG_OPTION_VUE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "react"               { return CFG_OPTION_REACT; }
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "gatling"              { return CFG_OPTION_GATLING; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "cucumber"             { return CFG_OPTION_CUCUMBER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "protractor"           { return CFG_OPTION_PROTRACTOR; }
+*/
+
 
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "String"               { return NUM_STRING; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "Integer"              { return NUM_INT; }
@@ -209,11 +282,19 @@ HEX_NUMBER = 0 [Xx] {HEX_DIGIT}*
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "Double"               { return NUM_DOUBLE; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "Boolean"              { return NUM_BOOELAN; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "LocalDate"            { return NUM_LOCAL_DATE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "Instant"              { return NUM_INSTANT; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "ZonedDateTime"        { return NUM_ZONED_DATE_TIME; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "Blob"                 { return NUM_BLOB; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "AnyBlob"              { return NUM_ANY_BLOB; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "ImageBlob"            { return NUM_IMAGE_BLOB; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "TextBlob"             { return NUM_TEXT_BLOB; }
+
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "OneToMany"            { return ONE_TO_MANY; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "OneToOne"             { return ONE_TO_ONE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "ManyToOne"            { return MANY_TO_ONE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "ManyToMany"           { return MANY_TO_MANY; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "to"                   { return TO; }
+
 
 
 // next are not listed in spec, but they seem to have the same sense as BUILT_IN_IDENTIFIER: somewhere treated as keywords, but can be used as normal identifiers
@@ -226,6 +307,7 @@ HEX_NUMBER = 0 [Xx] {HEX_DIGIT}*
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "required"             { return REQUIRED; }
 
 <YYINITIAL, LONG_TEMPLATE_ENTRY> {IDENTIFIER}           { return IDENTIFIER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> {PACKAGE_NAME}         { return PACKAGE_NAME; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "["                { return LBRACKET; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "]"                { return RBRACKET; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "("                { return LPAREN; }
@@ -284,7 +366,8 @@ HEX_NUMBER = 0 [Xx] {HEX_DIGIT}*
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "@"                { return AT; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "#"                { return HASH; }
 
-//<YYINITIAL, LONG_TEMPLATE_ENTRY> {NUMERIC_LITERAL} { return NUMBER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> {NUMERIC_LITERAL}  { return NUMBER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> {PATTERN}          { return PATTERN; }
 
 // raw strings
 //<YYINITIAL, LONG_TEMPLATE_ENTRY> {RAW_TRIPLE_QUOTED_STRING} { return RAW_TRIPLE_QUOTED_STRING; }

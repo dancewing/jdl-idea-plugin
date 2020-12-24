@@ -18,7 +18,18 @@ public class JdlSyntaxHighlighter extends SyntaxHighlighterBase implements Embed
   private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<>();
 
   static {
+
     fillMap(ATTRIBUTES, RESERVED_WORDS, JdlSyntaxHighlighterColors.KEYWORD);
+
+    fillMap(ATTRIBUTES, OPTIONS, JdlSyntaxHighlighterColors.ANNOTATION);
+
+    ATTRIBUTES.put(ENUM_CONSTANT_DECLARATION, JdlSyntaxHighlighterColors.ENUM_CONSTANT);
+
+    fillMap(ATTRIBUTES, FIELD_TYPES, JdlSyntaxHighlighterColors.INSTANCE_METHOD_DECLARATION);
+
+    //ATTRIBUTES.put(FIELD_TYPE_DEFINITION, JdlSyntaxHighlighterColors.INSTANCE_METHOD_DECLARATION);
+   // ATTRIBUTES.put(FIELD_NAME, JdlSyntaxHighlighterColors.CONSTRUCTOR);
+
 
 //    fillMap(ATTRIBUTES, ASSIGNMENT_OPERATORS, JdlSyntaxHighlighterColors.OPERATION_SIGN);
 //    fillMap(ATTRIBUTES, BINARY_OPERATORS, JdlSyntaxHighlighterColors.OPERATION_SIGN);
@@ -28,8 +39,8 @@ public class JdlSyntaxHighlighter extends SyntaxHighlighterBase implements Embed
 
     //fillMap(ATTRIBUTES, STRINGS, JdlSyntaxHighlighterColors.STRING);
 
-//    ATTRIBUTES.put(HEX_NUMBER, JdlSyntaxHighlighterColors.NUMBER);
-//    ATTRIBUTES.put(NUMBER, JdlSyntaxHighlighterColors.NUMBER);
+    ATTRIBUTES.put(HEX_NUMBER, JdlSyntaxHighlighterColors.NUMBER);
+    ATTRIBUTES.put(NUMBER, JdlSyntaxHighlighterColors.NUMBER);
 
 
     ATTRIBUTES.put(LPAREN, JdlSyntaxHighlighterColors.PARENTHS);
@@ -54,10 +65,32 @@ public class JdlSyntaxHighlighter extends SyntaxHighlighterBase implements Embed
     ATTRIBUTES.put(COLON, JdlSyntaxHighlighterColors.COLON);
     ATTRIBUTES.put(EXPRESSION_BODY_DEF, JdlSyntaxHighlighterColors.FAT_ARROW);
 
+
     ATTRIBUTES.put(SINGLE_LINE_COMMENT, JdlSyntaxHighlighterColors.LINE_COMMENT);
     ATTRIBUTES.put(SINGLE_LINE_DOC_COMMENT, JdlSyntaxHighlighterColors.DOC_COMMENT);
     ATTRIBUTES.put(MULTI_LINE_COMMENT, JdlSyntaxHighlighterColors.BLOCK_COMMENT);
     ATTRIBUTES.put(MULTI_LINE_DOC_COMMENT, JdlSyntaxHighlighterColors.DOC_COMMENT);
+
+
+    ATTRIBUTES.put(CFG_BASE_NAME, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_APPLICATION_TYPE, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_PACKAGE_NAME, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_SERVICE_DISCOVERY_TYPE, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_AUTHENTICATION_TYPE, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_DATABASE_TYPE, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_PROD_DATABASE_TYPE, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_DEV_DATABASE_TYPE, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_CACHE_PROVIDER, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_ENABLE_HIBERNATE_CACHE, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_BUILD_TOOL, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_CLIENT_FRAMEWORK, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_USE_SASS, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_TEST_FRAMEWORKS, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_SERVER_PORT, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+    ATTRIBUTES.put(CFG_SKIP_USER_MANAGEMENT, JdlSyntaxHighlighterColors.STATIC_FIELD_DECLARATION);
+
+
+
     ATTRIBUTES.put(BAD_CHARACTER, JdlSyntaxHighlighterColors.BAD_CHARACTER);
   }
 

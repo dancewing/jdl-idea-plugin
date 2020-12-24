@@ -14,12 +14,13 @@ public class JdlHighlightingErrorFilter extends HighlightErrorFilter {
   public boolean shouldHighlightErrorElement(@NotNull final PsiErrorElement element) {
     if (!(element.getLanguage() == JdlLanguage.INSTANCE)) return true;
 
-    final VirtualFile file = getRealVirtualFile(element.getContainingFile());
+    return true;
+/*    final VirtualFile file = getRealVirtualFile(element.getContainingFile());
     if (file != null && file.isInLocalFileSystem() && ProjectFileIndex.getInstance(element.getProject()).isInContent(file)) {
       return false;
     }
 
-    return true;
+    return true;*/
   }
 
   @Nullable

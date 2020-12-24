@@ -63,50 +63,33 @@ public interface JdlTokenTypes {
     }
   }
 
-  //TokenSet RESERVED_WORDS = TokenSet.create(ASSERT)
   TokenSet COMMENTS = TokenSet.create(SINGLE_LINE_COMMENT, SINGLE_LINE_DOC_COMMENT, MULTI_LINE_COMMENT, MULTI_LINE_DOC_COMMENT);
 
-  TokenSet RESERVED_WORDS = TokenSet.create(ASSERT,
-      BREAK,
-      CASE,
-      CATCH,
-      CLASS,
-      CONST,
-      CONTINUE,
-      DEFAULT,
-      DO,
-      ELSE,
-      ENUM,
-      EXTENDS,
-      FALSE,
-      FINAL,
-      FINALLY,
-      FOR,
-      IF,
-      IN,
-      IS,
-      NEW,
-      NULL,
-      RETHROW,
-      RETURN,
-      SUPER,
-      SWITCH,
-      THIS,
-      THROW,
-      TRUE,
-      TRY,
-      VAR,
-      WHILE,
-      WITH,
-      // 'void' is not listed as reserved word in spec but it may only be used as the return type of a function, so may be treated as reserved word
-      VOID,
+  TokenSet RESERVED_WORDS = TokenSet.create(
       APPLICATION,
       ENTITY,
-      DIRECTIVE_SERVICE,
-      DIRECTIVE_PAGINATE,
-      DIRECTIVE_MICROSERVICE,
+      ENUM,
+      RELATIONSHIP,
       AP_ENTITIES,
-      AP_CONFIG,
+      AP_CONFIG
+      );
+
+  TokenSet OPTIONS = TokenSet.create(
+      OPTION_SERVICE,
+      OPTION_PAGINATE,
+      OPTION_MICRO_SERVICE,
+      OPTION_SKIP_CLIENT,
+      OPTION_SKIP_SERVER,
+      OPTION_NO_FLUENT_METHOD,
+      OPTION_FILTER,
+      OPTION_READONLY,
+      OPTION_DTO,
+      OPTION_SEARCH,
+      OPTION_ANGULAR_SUFFIX,
+      OPTION_CLIENT_ROOT_FOLDER
+  );
+
+  TokenSet FIELD_TYPES = TokenSet.create(
       NUM_STRING,
       NUM_INT,
       NUM_LONG,
@@ -116,14 +99,13 @@ public interface JdlTokenTypes {
       NUM_ENUM,
       NUM_BOOELAN,
       NUM_LOCAL_DATE,
+      NUM_INSTANT,
       NUM_ZONED_DATE_TIME,
       NUM_BLOB,
       NUM_ANY_BLOB,
       NUM_IMAGE_BLOB,
-      NUM_TEXT_BLOB,
-
-      REQUIRED
-      );
+      NUM_TEXT_BLOB
+  );
 
   TokenSet BUILT_IN_IDENTIFIERS = TokenSet.create(ABSTRACT,
       AS,

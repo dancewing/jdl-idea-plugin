@@ -20,18 +20,96 @@
 
   generateFirstCheck=50
 
-//  mixin("string_literal_expression")="org.intellij.grammar.psi.impl.BnfStringImpl"
-//  implements("value") = "io.github.jhipster.jdl.psi.JdlNamedElement"
-//  extends("value") = "io.github.jhipster.jdl.psi.impl.JdlNamedElementImpl"
-
   tokens = [
+
+    NUMBER = 'NUMBER'
+    HEX_NUMBER = 'HEX_NUMBER'
 
     AP_ENTITIES = 'entities'
     AP_CONFIG = 'config'
 
-    DIRECTIVE_SERVICE = 'service';
-    DIRECTIVE_PAGINATE = 'paginate';
-    DIRECTIVE_MICROSERVICE = 'microservice';
+    CFG_BASE_NAME = 'baseName'
+    CFG_APPLICATION_TYPE = 'applicationType'
+    CFG_PACKAGE_NAME = 'packageName'
+    CFG_SERVICE_DISCOVERY_TYPE = 'serviceDiscoveryType'
+    CFG_AUTHENTICATION_TYPE = 'authenticationType'
+    CFG_DATABASE_TYPE = 'databaseType'
+    CFG_PROD_DATABASE_TYPE = 'prodDatabaseType'
+    CFG_DEV_DATABASE_TYPE = 'devDatabaseType'
+    CFG_CACHE_PROVIDER = 'cacheProvider'
+    CFG_ENABLE_HIBERNATE_CACHE = 'enableHibernateCache'
+    CFG_BUILD_TOOL = 'buildTool'
+    CFG_CLIENT_FRAMEWORK = 'clientFramework'
+    CFG_USE_SASS = 'useSass'
+    CFG_TEST_FRAMEWORKS = 'testFrameworks'
+    CFG_SERVER_PORT = 'serverPort'
+    CFG_SKIP_USER_MANAGEMENT = 'skipUserManagement'
+
+    OPTION_SERVICE = 'service'
+    OPTION_PAGINATE = 'paginate'
+    OPTION_MICRO_SERVICE = 'microservice'
+    OPTION_SKIP_CLIENT = 'skipClient'
+    OPTION_SKIP_SERVER = 'skipServer'
+    OPTION_NO_FLUENT_METHOD = 'noFluentMethod'
+    OPTION_FILTER = 'filter'
+    OPTION_READONLY = 'readOnly'
+    OPTION_DTO = 'dto'
+    OPTION_SEARCH = 'search'
+    OPTION_ANGULAR_SUFFIX = 'angularSuffix'
+    OPTION_CLIENT_ROOT_FOLDER = 'clientRootFolder'
+
+
+//    //application type
+//    CFG_OPTION_GATEWAY = 'gateway'
+//    CFG_OPTION_MONOLITH = 'monolith'
+//    CFG_OPTION_MICROSERVICE = 'microservice'
+//    CFG_OPTION_UAA = 'uaa'
+//
+//    //serviceDiscovery type
+//    CFG_OPTION_EUREKA = 'eureka'
+//    CFG_OPTION_CONSUL = 'consul'
+//    CFG_OPTION_NACOS = 'nacos'
+//
+//    //authentication type
+//    CFG_OPTION_JWT = 'jwt'
+//    CFG_OPTION_OAUTH2 = 'oauth2'
+//    CFG_OPTION_SESSION = 'session'
+//
+//    //database type
+//    CFG_OPTION_SQL = 'sql'
+//    CFG_OPTION_MONGODB = 'mongodb'
+//
+//    CFG_OPTION_MYSQL = 'mysql'
+//    CFG_OPTION_MARIADB = 'mariadb'
+//    CFG_OPTION_POSTGRESQL = 'postgresql'
+//    CFG_OPTION_ORACLE = 'oracle'
+//    CFG_OPTION_MSSQL = 'mssql'
+//
+//    //cache provider
+//    CFG_OPTION_EHCACHE = 'ehcache'
+//    CFG_OPTION_CAFFEINE = 'caffeine'
+//    CFG_OPTION_HAZELCAST = 'hazelcast'
+//    CFG_OPTION_INFINISPAN = 'infinispan'
+//    CFG_OPTION_MEMCACHED = 'memcached'
+//    CFG_OPTION_REDIS = 'redis'
+//
+//    CFG_OPTION_MAVEN = 'maven'
+//    CFG_OPTION_GRADLE = 'gradle'
+//
+//    CFG_OPTION_ANGULARX = 'angularX'
+//    CFG_OPTION_VUE = 'vue'
+//    CFG_OPTION_REACT = 'react'
+//
+//    CFG_OPTION_GATLING = 'gatling'
+//    CFG_OPTION_CUCUMBER = 'cucumber'
+//    CFG_OPTION_PROTRACTOR = 'protractor'
+
+    ONE_TO_MANY = 'OneToMany'
+    ONE_TO_ONE = 'OneToOne'
+    MANY_TO_ONE = 'ManyToOne'
+    MANY_TO_MANY = 'ManyToMany'
+
+    TO = 'to'
 
     NUM_STRING = 'String'
     NUM_INT = 'Integer'
@@ -42,6 +120,7 @@
     NUM_ENUM = 'Enum'
     NUM_BOOELAN = 'Boolean'
     NUM_LOCAL_DATE = 'LocalDate'
+    NUM_INSTANT = 'Instant'
     NUM_ZONED_DATE_TIME = 'ZonedDateTime'
     NUM_BLOB = 'Blob'
     NUM_ANY_BLOB = 'AnyBlob'
@@ -50,187 +129,261 @@
 
     T_WRONG = 'wrong token'
 
-    // reserved words
-      APPLICATION = 'application'
-      ASSERT="assert"
-      BREAK="break"
-      CASE="case"
-      CATCH="catch"
-      CLASS="class"
+  // reserved words
+    APPLICATION = 'application'
+    RELATIONSHIP = "relationship"
 
-      CONST="const"
-      CONTINUE="continue"
-      DEFAULT="default"
-      DO="do"
-      ELSE="else"
-      ENUM="enum"
-      ENTITY = "entity"
-      EXTENDS="extends"
-      FALSE="false"
-      FINAL="final"
-      FINALLY="finally"
-      FOR="for"
-      IF="if"
-      IN="in"
-      IS="is"
-      NEW="new"
-      NULL="null"
-      RETHROW="rethrow"
-      RETURN="return"
-      SUPER="super"
-      SWITCH="switch"
-      THIS="this"
-      THROW="throw"
-      TRUE="true"
-      TRY="try"
-      VAR="var"
-      VOID="void"
-      WHILE="while"
-      WITH="with"
+    ASSERT="assert"
+    BREAK="break"
+    CASE="case"
+    CATCH="catch"
+    CLASS="class"
 
-    // BUILT_IN_IDENTIFIER
-      ABSTRACT="abstract"
-      AS="as"
-      COVARIANT="covariant"
-      DEFERRED="deferred"
-      EXPORT="export"
-      EXTENSION="extension"
-      EXTERNAL="external"
-      FACTORY="factory"
-      GET="get"
-      IMPLEMENTS="implements"
-      IMPORT="import"
-      LIBRARY="library"
-      MIXIN="mixin"
-      OPERATOR="operator"
-      PART="part"
-      SET="set"
-      STATIC="static"
-      TYPEDEF="typedef"
 
-    // other
-      ON="on"
-      OF="of"
-      NATIVE="native"
-      SHOW="show"
-      HIDE="hide"
-      SYNC="sync"
-      ASYNC="async"
-      AWAIT="await"
-      YIELD="yield"
-      LATE="late"
-      REQUIRED="required"
+    CONST="const"
+    CONTINUE="continue"
+    DEFAULT="default"
+    DO="do"
+    ELSE="else"
+    ENUM="enum"
+    ENTITY = "entity"
+    EXTENDS="extends"
+    FALSE="false"
+    FINAL="final"
+    FINALLY="finally"
+    FOR="for"
+    IF="if"
+    IN="in"
+    IS="is"
+    NEW="new"
+    NULL="null"
+    RETHROW="rethrow"
+    RETURN="return"
+    SUPER="super"
+    SWITCH="switch"
+    THIS="this"
+    THROW="throw"
+    TRUE="true"
+    TRY="try"
+    VAR="var"
+    VOID="void"
+    WHILE="while"
+    WITH="with"
 
-      LBRACE="{"
-      RBRACE="}"
-      LBRACKET="["
-      RBRACKET="]"
-      LPAREN="("
-      RPAREN=")"
-      SEMICOLON=";"
-      MINUS="-"
-      MINUS_EQ="-="
-      MINUS_MINUS="--"
-      PLUS="+"
-      PLUS_PLUS="++"
-      PLUS_EQ="+="
-      DIV="/"
-      DIV_EQ="/="
-      MUL="*"
-      MUL_EQ="*="
-      INT_DIV="~/"
-      INT_DIV_EQ="~/="
-      REM_EQ="%="
-      REM="%"
-      BIN_NOT="~"
-      NOT="!"
+  // BUILT_IN_IDENTIFIER
+    ABSTRACT="abstract"
+    AS="as"
+    COVARIANT="covariant"
+    DEFERRED="deferred"
+    EXPORT="export"
+    EXTENSION="extension"
+    EXTERNAL="external"
+    FACTORY="factory"
+    GET="get"
+    IMPLEMENTS="implements"
+    IMPORT="import"
+    LIBRARY="library"
+    MIXIN="mixin"
+    OPERATOR="operator"
+    PART="part"
+    SET="set"
+    STATIC="static"
+    TYPEDEF="typedef"
 
-      EXPRESSION_BODY_DEF="=>"
-      EQ="="
-      EQ_EQ="=="
-      NEQ="!="
-      DOT="."
-      DOT_DOT=".."
-      QUEST_DOT_DOT="?.."
-      DOT_DOT_DOT="..."
-      DOT_DOT_DOT_QUEST="...?"
-      COMMA=","
-      COLON=":"
-      GT=">"
-      GT_EQ=">="
-      GT_GT=">>"
-      GT_GT_EQ=">>="
-      LT="<"
-      LT_EQ="<="
-      LT_LT="<<"
-      LT_LT_EQ="<<="
-      OR="|"
-      OR_EQ="|="
-      OR_OR="||"
-      OR_OR_EQ="||="
-      QUEST="?"
-      QUEST_DOT="?."
-      QUEST_QUEST="??"
-      QUEST_QUEST_EQ="??="
-      XOR="^"
-      XOR_EQ="^="
-      AND="&"
-      AND_EQ="&="
-      AND_AND="&&"
-      AND_AND_EQ="&&="
-      HASH="#"
-      AT="@"
+  // other
+    ON="on"
+    OF="of"
+    NATIVE="native"
+    SHOW="show"
+    HIDE="hide"
+    SYNC="sync"
+    ASYNC="async"
+    AWAIT="await"
+    YIELD="yield"
+    LATE="late"
+
+    REQUIRED="required"
+
+    LBRACE="{"
+    RBRACE="}"
+    LBRACKET="["
+    RBRACKET="]"
+    LPAREN="("
+    RPAREN=")"
+    SEMICOLON=";"
+    MINUS="-"
+    MINUS_EQ="-="
+    MINUS_MINUS="--"
+    PLUS="+"
+    PLUS_PLUS="++"
+    PLUS_EQ="+="
+    DIV="/"
+    DIV_EQ="/="
+    MUL="*"
+    MUL_EQ="*="
+    INT_DIV="~/"
+    INT_DIV_EQ="~/="
+    REM_EQ="%="
+    REM="%"
+    BIN_NOT="~"
+    NOT="!"
+
+    EXPRESSION_BODY_DEF="=>"
+    EQ="="
+    EQ_EQ="=="
+    NEQ="!="
+    DOT="."
+    DOT_DOT=".."
+    QUEST_DOT_DOT="?.."
+    DOT_DOT_DOT="..."
+    DOT_DOT_DOT_QUEST="...?"
+    COMMA=","
+    COLON=":"
+    GT=">"
+    GT_EQ=">="
+    GT_GT=">>"
+    GT_GT_EQ=">>="
+    LT="<"
+    LT_EQ="<="
+    LT_LT="<<"
+    LT_LT_EQ="<<="
+    OR="|"
+    OR_EQ="|="
+    OR_OR="||"
+    OR_OR_EQ="||="
+    QUEST="?"
+    QUEST_DOT="?."
+    QUEST_QUEST="??"
+    QUEST_QUEST_EQ="??="
+    XOR="^"
+    XOR_EQ="^="
+    AND="&"
+    AND_EQ="&="
+    AND_AND="&&"
+    AND_AND_EQ="&&="
+    HASH="#"
+    AT="@"
   ]
 }
 
 jdlFile ::= entry*
 
-entry ::= application_type_definition | entity_type_definition | enum_type_definition | directive_type_definition {
+private entry ::= application_definition | entity_definition | enum_definition | option_definition | relationship_definition {
   recoverWhile = entry_recover
 }
-private entry_recover ::= !(<<nonStrictID>> | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice')
+private entry_recover ::= !('@' | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice' | 'relationship')
 
-application_type_definition ::= 'application' application_type_body?
+application_definition ::= 'application' application_type_body {
+  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlPsiClass" implements="io.github.jhipster.jdl.psi.JdlClass"
+}
 
-application_type_body ::= '{' application_type_body_inner '}' {pin=1}
+private application_type_body ::= '{' application_type_body_inner '}' {pin=1}
 
-application_type_body_inner ::= application_entities
+private application_type_body_inner ::= application_config application_entities option_definitions?
 
-application_entities ::= '*' | entity_names
+application_config ::= 'config' application_config_body
 
-entity_names ::= componentName (',' componentName)*
+private application_config_body ::= '{' config_item (','|';')? (config_item (','|';')?)* '}'
+private config_item ::= config_string_item | config_boolean_item | package_name_config_item | config_number_item | config_array_item {
+  recoverWhile = simple_scope_recover
+}
+config_string_item ::= config_string_item_key config_string_item_value
+config_string_item_key ::= 'baseName' | 'applicationType' | 'serviceDiscoveryType' | 'authenticationType' | 'databaseType' | 'prodDatabaseType' | 'devDatabaseType' | 'cacheProvider' | 'buildTool' | 'clientFramework'
+config_string_item_value ::= IDENTIFIER | 'microservice'
 
-entity_type_definition ::= 'entity' componentName entity_type_body?
+package_name_config_item ::= 'packageName' package_name_identifier
+package_name_identifier ::= PACKAGE_NAME
+
+config_boolean_item ::= config_boolean_item_key config_boolean_item_value
+config_boolean_item_key ::= 'enableHibernateCache' | 'useSass' | 'skipUserManagement'
+config_boolean_item_value ::= 'true' | 'false'
+
+config_number_item ::= config_number_item_key config_number_item_value
+config_number_item_key ::= 'serverPort'
+config_number_item_value ::= NUMBER
+
+config_array_item ::= config_array_item_key '['config_array_item_values ']'
+config_array_item_key ::= 'testFrameworks'
+private config_array_item_values ::= config_array_item_value(','config_array_item_value)*
+config_array_item_value ::= IDENTIFIER
+
+application_entities ::= 'entities' ('*' | entity_names) ('except' entity_names)?
+
+private entity_names ::= entity_name (',' entity_name)*
+
+option_definitions ::= option_definition* {
+  recoverWhile = option_definition_recover
+}
+private option_definition_recover ::= !(option_name | '}')
+
+entity_definition ::= metadata* 'entity' entity_name entity_type_body?
 {pin=2  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlPsiClass" implements="io.github.jhipster.jdl.psi.JdlClass"}
+
+private entity_name ::= componentName
 
 componentName ::= << nonStrictID >> {mixin="io.github.jhipster.jdl.psi.impl.JdlNamedElementImpl" implements="io.github.jhipster.jdl.psi.JdlNamedElement"}
 
-entity_type_body ::= '{' entity_type_body_inner '}' {pin = 1}
+private entity_type_body ::= '{' entity_type_body_inner '}' {pin = 1}
 
-entity_type_body_inner ::= field_member* {
+private entity_type_body_inner ::= field_member* {
   recoverWhile = simple_scope_recover
 }
 
-field_member ::=  field_type componentName field_validation?
-{recoverWhile="field_member_recover" mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
+field_member ::= metadata* field_name field_type_definition field_validations? (','|';')?
+{mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
+
+field_name ::= componentName
 
 private field_member_recover ::= !(<<nonStrictID>> | field_type | '}' )
 
-private field_type ::= 'String' | 'Integer' | 'Long' | 'BigDecimal' | 'Float' | 'Double' | 'Enum' | 'Boolean' | 'LocalDate' | 'ZonedDateTime' | 'Blob' | 'AnyBlob' | 'ImageBlob' | 'TextBlob'
-private field_validation ::= 'required'
+field_type_definition ::= field_type | 'String' | 'Integer' | 'Long' | 'BigDecimal' | 'Float' | 'Double' | 'Enum' | 'Boolean' | 'LocalDate' | 'Instant'| 'ZonedDateTime' | 'Blob' | 'AnyBlob' | 'ImageBlob' | 'TextBlob'
+private field_type ::=  componentName
+private field_validations ::= field_validation(field_validation)*
+private field_validation ::= 'required' | 'unique' | minlength | maxlength | min | max | minbytes | maxbytes | pattern
+private minlength ::= 'minlength' '(' NUMBER ')'
+private maxlength ::= 'maxlength' '(' NUMBER ')'
+private min ::= 'min' '(' NUMBER ')'
+private max ::= 'max' '(' NUMBER ')'
+private minbytes ::= 'minbytes' '(' NUMBER ')'
+private maxbytes ::= 'maxbytes' '(' NUMBER ')'
+private pattern ::= 'pattern' '(' PATTERN ')'
 
-enum_type_definition ::= 'enum' componentName '{' enumConstantDeclaration (',' enumConstantDeclaration)* ','? '}'
+enum_definition ::= metadata* 'enum' enum_name '{' enumConstantDeclaration (',' enumConstantDeclaration)* ','? '}'
 {pin=2  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlPsiClass" implements="io.github.jhipster.jdl.psi.JdlClass"}
+
+private enum_name ::= componentName
 
 enumConstantDeclaration ::= componentName
 {mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
 
 //
-directive_type_definition ::= directive_name directive_type_body?
-private directive_name ::= ('service' | 'paginate' | 'microservice')
-directive_type_body ::= '{' '}'
+option_definition ::= option_name option_type_body {
+  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlPsiClass" implements="io.github.jhipster.jdl.psi.JdlClass"
+}
+option_name ::= ('service' | 'paginate' | 'microservice' | 'skipClient' | 'skipServer' | 'noFluentMethod' | 'filter' | 'readOnly' | 'dto' | 'search' | 'angularSuffix' | 'clientRootFolder')
+option_type_body ::= ('*' | entity_names) 'with' option_type_value ('except' entity_names)?
+option_type_value ::= IDENTIFIER
 
-private simple_scope_recover ::= !'}'
+private simple_scope_recover ::= !(','| ';' | '}')
+
+relationship_definition ::= 'relationship' relationship_type relationship_body
+relationship_type ::= 'OneToOne' | 'OneToMany' | 'ManyToOne' | 'ManyToMany'
+private relationship_body ::= '{' relationship_items (','|';')? (relationship_items (','|';')?)* '}'
+relationship_items ::= metadata* relationship_source_type relationship_type_options? 'to' relationship_target_type relationship_type_options?
+relationship_type_options ::= '{' relationship_field_name relationship_field_display_name? 'required'? '}'
+relationship_field_name ::= entity_name
+relationship_field_display_name ::= '(' entity_name ')'
+relationship_source_type ::= entity_name
+relationship_target_type ::= entity_name
+
+metadata ::= '@' annotation_name arguments?
+private annotation_name ::= componentName
+private arguments ::= '(' argumentList? ')'
+argumentList ::= argumentListPart (',' argumentListPart)* ','? {recoverWhile="argument_list_recover"}
+private argument_list_recover ::= !(')')
+private argumentListPart ::= argumentValue {recoverWhile="argument_list_part_recover"}
+private argument_list_part_recover ::= !(')' | ',')
+argumentValue ::= componentName
 
 // see nonStrictID
 id ::= IDENTIFIER

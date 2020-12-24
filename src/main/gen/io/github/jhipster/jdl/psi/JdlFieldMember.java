@@ -8,6 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface JdlFieldMember extends JdlComponent {
 
   @NotNull
-  JdlComponentName getComponentName();
+  JdlFieldName getFieldName();
+
+  @NotNull
+  JdlFieldTypeDefinition getFieldTypeDefinition();
+
+  @NotNull
+  List<JdlMetadata> getMetadataList();
 
 }

@@ -27,9 +27,9 @@ public class JdlApplicationEntitiesImpl extends JdlPsiCompositeElementImpl imple
   }
 
   @Override
-  @Nullable
-  public JdlEntityNames getEntityNames() {
-    return findChildByClass(JdlEntityNames.class);
+  @NotNull
+  public List<JdlComponentName> getComponentNameList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlComponentName.class);
   }
 
 }
