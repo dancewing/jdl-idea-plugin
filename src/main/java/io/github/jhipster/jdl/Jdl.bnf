@@ -102,7 +102,8 @@
 
   // reserved words
     APPLICATION = 'application'
-    RELATIONSHIP = "relationship"
+    RELATIONSHIP = 'relationship'
+    GLOBAL = "global"
 
     ASSERT="assert"
     BREAK="break"
@@ -205,13 +206,20 @@
   ]
 }
 
-jdlFile ::= entry*
+jdlFile ::= global_definition entry*
 
-private entry ::= application_definition | entity_definition | enum_definition | option_definition | relationship_definition {
+global_definition ::= 'global' global_definition_body
+private global_definition_body ::= '{' global_definition_body_inner '}'
+private global_definition_body_inner ::= global_framework_version global_build_tool
+private global_framework_version ::= 'frameworkVersion' framework_version
+framework_version ::= VERSION
+private global_build_tool ::= 'buildTool' build_tool
+build_tool ::= ['maven' | 'gradle']
+
+private entry ::=  application_definition | entity_definition | enum_definition | option_definition | relationship_definition {
   recoverWhile = entry_recover
-
 }
-private entry_recover ::= !('@' | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice' | 'relationship')
+private entry_recover ::= !('@' | 'global' | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice' | 'relationship')
 
 application_definition ::= 'application' application_type_body
 {pin=1  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
@@ -232,7 +240,7 @@ config_string_item_key ::= 'applicationType'|'authenticationType'|'baseName'|'bu
 config_string_item_value ::= IDENTIFIER | 'microservice'
 
 package_name_config_item ::= 'packageName' package_name_identifier
-package_name_identifier ::= PACKAGE_NAME
+package_name_identifier ::= IDENTIFIER_WITH_DOT
 
 config_boolean_item ::= config_boolean_item_key config_boolean_item_value
 config_boolean_item_key ::= 'enableHibernateCache'|'enableSwaggerCodegen'|'enableTranslation'|'reactive'|'skipClient'|'skipServer'|'skipUserManagement'|'useSass'

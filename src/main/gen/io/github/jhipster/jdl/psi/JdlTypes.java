@@ -15,6 +15,7 @@ public interface JdlTypes {
   IElementType APPLICATION_TYPE_BODY = new JdlElementType("APPLICATION_TYPE_BODY");
   IElementType ARGUMENT_LIST = new JdlElementType("ARGUMENT_LIST");
   IElementType ARGUMENT_VALUE = new JdlElementType("ARGUMENT_VALUE");
+  IElementType BUILD_TOOL = new JdlElementType("BUILD_TOOL");
   IElementType COMPONENT_NAME = new JdlElementType("COMPONENT_NAME");
   IElementType CONFIG_ARRAY_ITEM = new JdlElementType("CONFIG_ARRAY_ITEM");
   IElementType CONFIG_ARRAY_ITEM_KEY = new JdlElementType("CONFIG_ARRAY_ITEM_KEY");
@@ -39,6 +40,8 @@ public interface JdlTypes {
   IElementType FIELD_TYPE_DEFINITION = new JdlElementType("FIELD_TYPE_DEFINITION");
   IElementType FIELD_VALIDATION = new JdlElementType("FIELD_VALIDATION");
   IElementType FIELD_VALIDATIONS = new JdlElementType("FIELD_VALIDATIONS");
+  IElementType FRAMEWORK_VERSION = new JdlElementType("FRAMEWORK_VERSION");
+  IElementType GLOBAL_DEFINITION = new JdlElementType("GLOBAL_DEFINITION");
   IElementType ID = new JdlElementType("ID");
   IElementType INCLUDE_ENTITY_NAMES = new JdlElementType("INCLUDE_ENTITY_NAMES");
   IElementType METADATA = new JdlElementType("METADATA");
@@ -114,11 +117,13 @@ public interface JdlTypes {
   IElementType FINALLY = new JdlTokenType("finally");
   IElementType FOR = new JdlTokenType("for");
   IElementType GET = new JdlTokenType("get");
+  IElementType GLOBAL = new JdlTokenType("global");
   IElementType GT = new JdlTokenType(">");
   IElementType HASH = new JdlTokenType("#");
   IElementType HEX_NUMBER = new JdlTokenType("HEX_NUMBER");
   IElementType HIDE = new JdlTokenType("hide");
   IElementType IDENTIFIER = new JdlTokenType("IDENTIFIER");
+  IElementType IDENTIFIER_WITH_DOT = new JdlTokenType("IDENTIFIER_WITH_DOT");
   IElementType IF = new JdlTokenType("if");
   IElementType IMPLEMENTS = new JdlTokenType("implements");
   IElementType IMPORT = new JdlTokenType("import");
@@ -176,7 +181,6 @@ public interface JdlTypes {
   IElementType OPTION_SERVICE = new JdlTokenType("service");
   IElementType OR = new JdlTokenType("|");
   IElementType PACKAGENAME = new JdlTokenType("packageName");
-  IElementType PACKAGE_NAME = new JdlTokenType("PACKAGE_NAME");
   IElementType PART = new JdlTokenType("part");
   IElementType PATTERN = new JdlTokenType("PATTERN");
   IElementType PLUS = new JdlTokenType("+");
@@ -214,6 +218,7 @@ public interface JdlTypes {
   IElementType T_WRONG = new JdlTokenType("wrong token");
   IElementType USESASS = new JdlTokenType("useSass");
   IElementType VAR = new JdlTokenType("var");
+  IElementType VERSION = new JdlTokenType("VERSION");
   IElementType VOID = new JdlTokenType("void");
   IElementType WHILE = new JdlTokenType("while");
   IElementType WITH = new JdlTokenType("with");
@@ -243,6 +248,9 @@ public interface JdlTypes {
       }
       else if (type == ARGUMENT_VALUE) {
         return new JdlArgumentValueImpl(node);
+      }
+      else if (type == BUILD_TOOL) {
+        return new JdlBuildToolImpl(node);
       }
       else if (type == COMPONENT_NAME) {
         return new JdlComponentNameImpl(node);
@@ -315,6 +323,12 @@ public interface JdlTypes {
       }
       else if (type == FIELD_VALIDATIONS) {
         return new JdlFieldValidationsImpl(node);
+      }
+      else if (type == FRAMEWORK_VERSION) {
+        return new JdlFrameworkVersionImpl(node);
+      }
+      else if (type == GLOBAL_DEFINITION) {
+        return new JdlGlobalDefinitionImpl(node);
       }
       else if (type == ID) {
         return new JdlIdImpl(node);

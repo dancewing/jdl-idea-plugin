@@ -32,6 +32,7 @@ import static io.github.jhipster.jdl.psi.JdlTypes.EXTENSION;
 import static io.github.jhipster.jdl.psi.JdlTypes.EXTERNAL;
 import static io.github.jhipster.jdl.psi.JdlTypes.FACTORY;
 import static io.github.jhipster.jdl.psi.JdlTypes.GET;
+import static io.github.jhipster.jdl.psi.JdlTypes.GLOBAL;
 import static io.github.jhipster.jdl.psi.JdlTypes.HIDE;
 import static io.github.jhipster.jdl.psi.JdlTypes.IMPLEMENTS;
 import static io.github.jhipster.jdl.psi.JdlTypes.IMPORT;
@@ -162,6 +163,7 @@ public interface JdlTokenTypes {
   TokenSet COMMENTS = TokenSet.create(SINGLE_LINE_COMMENT, SINGLE_LINE_DOC_COMMENT, MULTI_LINE_COMMENT, MULTI_LINE_DOC_COMMENT);
 
   TokenSet RESERVED_WORDS = TokenSet.create(
+      GLOBAL,
       APPLICATION,
       ENTITY,
       ENUM,

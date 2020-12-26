@@ -3,6 +3,11 @@
  * This uses JHipster registry for service discovery
  */
 
+global {
+   frameworkVersion 1.0.SNAPSHOT
+   buildTool gradle
+}
+
 application {
   config {
     baseName store,

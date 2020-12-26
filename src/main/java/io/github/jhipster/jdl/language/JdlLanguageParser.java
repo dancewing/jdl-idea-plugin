@@ -33,6 +33,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 public class JdlLanguageParser {
 
+  private final JdlGlobal global = new JdlGlobal();
   private final Map<String, JdlEntity> entitiesMap = new HashMap<>();
   private final Map<String, JdlEntity> enumsMap = new HashMap<>();
   private final Map<String, JdlApplication> applicationsMap = new HashMap<>();
@@ -52,6 +53,10 @@ public class JdlLanguageParser {
 
   public List<JdlOption> getOptions() {
     return options;
+  }
+
+  public JdlGlobal getGlobal() {
+    return global;
   }
 
   private JdlLanguageParser() {
@@ -247,9 +252,13 @@ public class JdlLanguageParser {
       System.out.println("}");
     }
   }
-
+  private void parseGlobal(JdlFile jdlFile) {
+     global.setFrameworkVersion(jdlFile.getGlobal().getFrameworkVersion().getText());
+     global.setBuildTool(jdlFile.getGlobal().getBuildTool().getText());
+  }
   public static JdlLanguageParser from(JdlFile jdlFile) {
     JdlLanguageParser jdlLanguageParser = new JdlLanguageParser();
+    jdlLanguageParser.parseGlobal(jdlFile);
     jdlLanguageParser.parseEnums(jdlFile);
     jdlLanguageParser.parseEntities(jdlFile);
     jdlLanguageParser.parseOptions(jdlFile);
@@ -257,5 +266,7 @@ public class JdlLanguageParser {
     jdlLanguageParser.parseApplications(jdlFile);
     return jdlLanguageParser;
   }
+
+
 
 }

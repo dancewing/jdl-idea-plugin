@@ -48,4 +48,8 @@ public class JdlFile extends PsiFileBase {
   public List<JdlRelationshipDefinition> getRelationshipDefinitions() {
      return PsiTreeUtil.getStubChildrenOfTypeAsList(this, JdlRelationshipDefinition.class);
   }
+
+  public JdlGlobalDefinition getGlobal() {
+     return PsiTreeUtil.findChildOfType(this, JdlGlobalDefinition.class);
+  }
 }

@@ -333,6 +333,25 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // ['maven' | 'gradle']
+  public static boolean build_tool(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "build_tool")) return false;
+    Marker m = enter_section_(b, l, _NONE_, BUILD_TOOL, "<build tool>");
+    build_tool_0(b, l + 1);
+    exit_section_(b, l, m, true, false, null);
+    return true;
+  }
+
+  // 'maven' | 'gradle'
+  private static boolean build_tool_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "build_tool_0")) return false;
+    boolean r;
+    r = consumeToken(b, "maven");
+    if (!r) r = consumeToken(b, "gradle");
+    return r;
+  }
+
+  /* ********************************************************** */
   // << nonStrictID >>
   public static boolean componentName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "componentName")) return false;
@@ -664,7 +683,7 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // !('@' | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice' | 'relationship')
+  // !('@' | 'global' | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice' | 'relationship')
   static boolean entry_recover(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "entry_recover")) return false;
     boolean r;
@@ -674,11 +693,12 @@ public class JdlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // '@' | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice' | 'relationship'
+  // '@' | 'global' | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice' | 'relationship'
   private static boolean entry_recover_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "entry_recover_0")) return false;
     boolean r;
     r = consumeToken(b, AT);
+    if (!r) r = consumeToken(b, GLOBAL);
     if (!r) r = consumeToken(b, APPLICATION);
     if (!r) r = consumeToken(b, ENTITY);
     if (!r) r = consumeToken(b, ENUM);
@@ -948,6 +968,82 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // VERSION
+  public static boolean framework_version(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "framework_version")) return false;
+    if (!nextTokenIs(b, VERSION)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, VERSION);
+    exit_section_(b, m, FRAMEWORK_VERSION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'buildTool' build_tool
+  static boolean global_build_tool(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "global_build_tool")) return false;
+    if (!nextTokenIs(b, BUILDTOOL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, BUILDTOOL);
+    r = r && build_tool(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'global' global_definition_body
+  public static boolean global_definition(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "global_definition")) return false;
+    if (!nextTokenIs(b, GLOBAL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, GLOBAL);
+    r = r && global_definition_body(b, l + 1);
+    exit_section_(b, m, GLOBAL_DEFINITION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '{' global_definition_body_inner '}'
+  static boolean global_definition_body(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "global_definition_body")) return false;
+    if (!nextTokenIs(b, LBRACE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LBRACE);
+    r = r && global_definition_body_inner(b, l + 1);
+    r = r && consumeToken(b, RBRACE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // global_framework_version global_build_tool
+  static boolean global_definition_body_inner(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "global_definition_body_inner")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = global_framework_version(b, l + 1);
+    r = r && global_build_tool(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // 'frameworkVersion' framework_version
+  static boolean global_framework_version(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "global_framework_version")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, "frameworkVersion");
+    r = r && framework_version(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // IDENTIFIER
   public static boolean id(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "id")) return false;
@@ -994,13 +1090,25 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // entry*
+  // global_definition entry*
   static boolean jdlFile(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "jdlFile")) return false;
+    if (!nextTokenIs(b, GLOBAL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = global_definition(b, l + 1);
+    r = r && jdlFile_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // entry*
+  private static boolean jdlFile_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "jdlFile_1")) return false;
     while (true) {
       int c = current_position_(b);
       if (!entry(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "jdlFile", c)) break;
+      if (!empty_element_parsed_guard_(b, "jdlFile_1", c)) break;
     }
     return true;
   }
@@ -1240,13 +1348,13 @@ public class JdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // PACKAGE_NAME
+  // IDENTIFIER_WITH_DOT
   public static boolean package_name_identifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "package_name_identifier")) return false;
-    if (!nextTokenIs(b, PACKAGE_NAME)) return false;
+    if (!nextTokenIs(b, IDENTIFIER_WITH_DOT)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PACKAGE_NAME);
+    r = consumeToken(b, IDENTIFIER_WITH_DOT);
     exit_section_(b, m, PACKAGE_NAME_IDENTIFIER, r);
     return r;
   }

@@ -34,6 +34,10 @@ public class JdlVisitor extends PsiElementVisitor {
     visitPsiCompositeElement(o);
   }
 
+  public void visitBuildTool(@NotNull JdlBuildTool o) {
+    visitPsiCompositeElement(o);
+  }
+
   public void visitComponentName(@NotNull JdlComponentName o) {
     visitNamedElement(o);
   }
@@ -127,6 +131,14 @@ public class JdlVisitor extends PsiElementVisitor {
   }
 
   public void visitFieldValidations(@NotNull JdlFieldValidations o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitFrameworkVersion(@NotNull JdlFrameworkVersion o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitGlobalDefinition(@NotNull JdlGlobalDefinition o) {
     visitPsiCompositeElement(o);
   }
 
