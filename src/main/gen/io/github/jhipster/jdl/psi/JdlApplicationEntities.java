@@ -7,7 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface JdlApplicationEntities extends JdlPsiCompositeElement {
 
-  @NotNull
-  List<JdlComponentName> getComponentNameList();
+  @Nullable
+  JdlExcludeEntityNames getExcludeEntityNames();
+
+  @Nullable
+  JdlIncludeEntityNames getIncludeEntityNames();
 
 }

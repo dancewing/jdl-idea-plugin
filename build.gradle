@@ -8,7 +8,10 @@ plugins {
 group 'org.intellij.sdk'
 version '2.0.0'
 
+apply plugin: 'java'
+
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
   mavenCentral()
@@ -32,9 +35,12 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-  //version = '2020.2'
-  localPath = '/Volumes/workspace/p/ideaIC-2020.2.4'
-  plugins = ['com.intellij.java']
+  sandboxDirectory = "${rootProject.rootDir}/idea-sandbox"
+  // 开发环境运行时使用的版本
+  version '2020.2.4'
+  type 'IU'
+  // https://www.jetbrains.com/intellij-repository/releases
+  plugins = ['com.intellij.java', 'com.intellij.diagram', 'Velocity']
 }
 
 buildSearchableOptions {

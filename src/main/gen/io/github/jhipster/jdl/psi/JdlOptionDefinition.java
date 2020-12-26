@@ -5,12 +5,18 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlOptionDefinition extends JdlClass {
+public interface JdlOptionDefinition extends JdlComponent {
+
+  @Nullable
+  JdlExcludeEntityNames getExcludeEntityNames();
+
+  @Nullable
+  JdlIncludeEntityNames getIncludeEntityNames();
 
   @NotNull
   JdlOptionName getOptionName();
 
-  @NotNull
-  JdlOptionTypeBody getOptionTypeBody();
+  @Nullable
+  JdlOptionTypeValue getOptionTypeValue();
 
 }

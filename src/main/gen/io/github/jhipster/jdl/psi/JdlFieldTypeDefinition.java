@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface JdlFieldTypeDefinition extends JdlPsiCompositeElement {
 
-  @Nullable
-  JdlComponentName getComponentName();
-
 }

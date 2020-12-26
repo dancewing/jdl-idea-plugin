@@ -4,26 +4,12 @@ import static io.github.jhipster.jdl.psi.JdlTypes.*;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.openapi.util.KeyWithDefaultValue;
 import io.github.jhipster.jdl.JdlTokenTypes;
+import java.util.Deque;
+import com.intellij.openapi.util.Key;
 
 public class JdlParserUtil extends GeneratedParserUtilBase {
-
-  public static boolean clearError(PsiBuilder builder, int level) {
-    ErrorState.get(builder).currentFrame.errorReportedAt = -1;
-    return true;
-  }
-
-  public static boolean withProtectedLastVariantPos(PsiBuilder builder, int level, Parser parser) {
-    ErrorState state = ErrorState.get(builder);
-    int prev = state.currentFrame.lastVariantAt;
-    if (parser.parse(builder, level)) {
-      return true;
-    }
-    else {
-      state.currentFrame.lastVariantAt = prev;
-      return false;
-    }
-  }
 
   public static boolean nonStrictID(PsiBuilder builder_, int level_) {
     final PsiBuilder.Marker marker_ = builder_.mark();

@@ -204,8 +204,7 @@ HEX_NUMBER = 0 [Xx] {HEX_DIGIT}*
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "microservice"         { return OPTION_MICRO_SERVICE; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "paginate"             { return OPTION_PAGINATE; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "service"              { return OPTION_SERVICE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipClient"           { return OPTION_SKIP_CLIENT; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipServer"           { return OPTION_SKIP_SERVER; }
+
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "noFluentMethod"       { return OPTION_NO_FLUENT_METHOD; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "filter"               { return OPTION_FILTER; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "readOnly"             { return OPTION_READONLY; }
@@ -214,64 +213,40 @@ HEX_NUMBER = 0 [Xx] {HEX_DIGIT}*
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "angularSuffix"        { return OPTION_ANGULAR_SUFFIX; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "clientRootFolder"     { return OPTION_CLIENT_ROOT_FOLDER; }
 
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "baseName"               { return CFG_BASE_NAME; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "applicationType"        { return CFG_APPLICATION_TYPE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "packageName"            { return CFG_PACKAGE_NAME; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "serviceDiscoveryType"   { return CFG_SERVICE_DISCOVERY_TYPE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "authenticationType"     { return CFG_AUTHENTICATION_TYPE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "databaseType"           { return CFG_DATABASE_TYPE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "prodDatabaseType"       { return CFG_PROD_DATABASE_TYPE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "devDatabaseType"        { return CFG_DEV_DATABASE_TYPE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "cacheProvider"          { return CFG_CACHE_PROVIDER; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "enableHibernateCache"   { return CFG_ENABLE_HIBERNATE_CACHE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "buildTool"              { return CFG_BUILD_TOOL; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "clientFramework"        { return CFG_CLIENT_FRAMEWORK; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "useSass"                { return CFG_USE_SASS; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "testFrameworks"         { return CFG_TEST_FRAMEWORKS; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "serverPort"             { return CFG_SERVER_PORT; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipUserManagement"     { return CFG_SKIP_USER_MANAGEMENT; }
-/*
+//<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipClient"           { return OPTION_SKIP_CLIENT; }
+//<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipServer"           { return OPTION_SKIP_SERVER; }
 
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "gateway"              { return CFG_OPTION_GATEWAY; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "monolith"             { return CFG_OPTION_MONOLITH; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "microservice"         { return CFG_OPTION_MICROSERVICE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "uaa"                  { return CFG_OPTION_UAA; }
-
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "eureka"             { return CFG_OPTION_EUREKA; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "consul"             { return CFG_OPTION_CONSUL; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "nacos"              { return CFG_OPTION_NACOS; }
-
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "jwt"                 { return CFG_OPTION_JWT; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "oauth2"              { return CFG_OPTION_OAUTH2; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "session"             { return CFG_OPTION_SESSION; }
-
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "sql"                 { return CFG_OPTION_SQL; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "mongodb"             { return CFG_OPTION_MONGODB; }
-
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "mysql"               { return CFG_OPTION_MYSQL; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "mariadb"             { return CFG_OPTION_MARIADB; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "postgresql"          { return CFG_OPTION_POSTGRESQL; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "oracle"              { return CFG_OPTION_ORACLE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "mssql"               { return CFG_OPTION_MSSQL; }
-
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "ehcache"             { return CFG_OPTION_EHCACHE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "caffeine"            { return CFG_OPTION_CAFFEINE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "hazelcast"           { return CFG_OPTION_HAZELCAST; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "infinispan"          { return CFG_OPTION_INFINISPAN; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "memcached"           { return CFG_OPTION_MEMCACHED; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "redis"               { return CFG_OPTION_REDIS; }
-
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "maven"               { return CFG_OPTION_MAVEN; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "gradle"              { return CFG_OPTION_GRADLE; }
-
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "angularX"            { return CFG_OPTION_ANGULARX; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "vue"                 { return CFG_OPTION_VUE; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "react"               { return CFG_OPTION_REACT; }
-
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "gatling"              { return CFG_OPTION_GATLING; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "cucumber"             { return CFG_OPTION_CUCUMBER; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "protractor"           { return CFG_OPTION_PROTRACTOR; }
-*/
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "applicationType"               { return APPLICATIONTYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "authenticationType"               { return AUTHENTICATIONTYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "baseName"               { return BASENAME; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "buildTool"               { return BUILDTOOL; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "cacheProvider"               { return CACHEPROVIDER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "clientFramework"               { return CLIENTFRAMEWORK; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "clientPackageManager"               { return CLIENTPACKAGEMANAGER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "clientTheme"               { return CLIENTTHEME; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "clientThemeVariant"               { return CLIENTTHEMEVARIANT; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "databaseType"               { return DATABASETYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "devDatabaseType"               { return DEVDATABASETYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "dtoSuffix"               { return DTOSUFFIX; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "enableHibernateCache"               { return ENABLEHIBERNATECACHE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "enableSwaggerCodegen"               { return ENABLESWAGGERCODEGEN; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "enableTranslation"               { return ENABLETRANSLATION; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "entitySuffix"               { return ENTITYSUFFIX; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "jhiPrefix"               { return JHIPREFIX; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "languages"               { return LANGUAGES; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "messageBroker"               { return MESSAGEBROKER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "nativeLanguage"               { return NATIVELANGUAGE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "packageName"               { return PACKAGENAME; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "prodDatabaseType"               { return PRODDATABASETYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "reactive"               { return REACTIVE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "searchEngine"               { return SEARCHENGINE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "serverPort"               { return SERVERPORT; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "serviceDiscoveryType"               { return SERVICEDISCOVERYTYPE; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipClient"               { return SKIPCLIENT; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipServer"               { return SKIPSERVER; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "skipUserManagement"               { return SKIPUSERMANAGEMENT; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "testFrameworks"               { return TESTFRAMEWORKS; }
+<YYINITIAL, LONG_TEMPLATE_ENTRY> "useSass"               { return USESASS; }
 
 
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "String"               { return NUM_STRING; }
@@ -314,55 +289,21 @@ HEX_NUMBER = 0 [Xx] {HEX_DIGIT}*
 <YYINITIAL, LONG_TEMPLATE_ENTRY> ")"                { return RPAREN; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> ";"                { return SEMICOLON; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "-"                { return MINUS; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "-="               { return MINUS_EQ; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "--"               { return MINUS_MINUS; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "+"                { return PLUS; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "++"               { return PLUS_PLUS; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "+="               { return PLUS_EQ; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "/"                { return DIV; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "/="               { return DIV_EQ; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "*"                { return MUL; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "*="               { return MUL_EQ; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "~/"               { return INT_DIV; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "~/="              { return INT_DIV_EQ; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "%="               { return REM_EQ; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "%"                { return REM; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "~"                { return BIN_NOT; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "!"                { return NOT; }
 
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "=>"               { return EXPRESSION_BODY_DEF; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "="                { return EQ; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "=="               { return EQ_EQ; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "!="               { return NEQ; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "."                { return DOT; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> ".."               { return DOT_DOT; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "?.."              { return QUEST_DOT_DOT; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "..."              { return DOT_DOT_DOT; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "...?"             { return DOT_DOT_DOT_QUEST; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> ","                { return COMMA; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> ":"                { return COLON; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> ">"                { return GT; }
-//<YYINITIAL, LONG_TEMPLATE_ENTRY> ">="               { return GT_EQ;    } breaks mixin app parsing
-//<YYINITIAL, LONG_TEMPLATE_ENTRY> ">>"               { return GT_GT;    } breaks generics parsing
-//<YYINITIAL, LONG_TEMPLATE_ENTRY> ">>="              { return GT_GT_EQ; } breaks mixin app parsing
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "<"                { return LT; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "<="               { return LT_EQ; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "<<"               { return LT_LT; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "<<="              { return LT_LT_EQ; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "?"                { return QUEST; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "?."               { return QUEST_DOT; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "??"               { return QUEST_QUEST; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "??="              { return QUEST_QUEST_EQ; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "|"                { return OR; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "|="               { return OR_EQ; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "||"               { return OR_OR; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "||="              { return OR_OR_EQ; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "^"                { return XOR; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "^="               { return XOR_EQ; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "&"                { return AND; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "&="               { return AND_EQ; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "&&"               { return AND_AND; }
-<YYINITIAL, LONG_TEMPLATE_ENTRY> "&&="              { return AND_AND_EQ; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "@"                { return AT; }
 <YYINITIAL, LONG_TEMPLATE_ENTRY> "#"                { return HASH; }
 

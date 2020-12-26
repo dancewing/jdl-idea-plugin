@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlOptionDefinitionImpl extends AbstractJdlPsiClass implements JdlOptionDefinition {
+public class JdlOptionDefinitionImpl extends AbstractJdlComponentImpl implements JdlOptionDefinition {
 
   public JdlOptionDefinitionImpl(@NotNull ASTNode node) {
     super(node);
@@ -27,15 +27,27 @@ public class JdlOptionDefinitionImpl extends AbstractJdlPsiClass implements JdlO
   }
 
   @Override
+  @Nullable
+  public JdlExcludeEntityNames getExcludeEntityNames() {
+    return findChildByClass(JdlExcludeEntityNames.class);
+  }
+
+  @Override
+  @Nullable
+  public JdlIncludeEntityNames getIncludeEntityNames() {
+    return findChildByClass(JdlIncludeEntityNames.class);
+  }
+
+  @Override
   @NotNull
   public JdlOptionName getOptionName() {
     return findNotNullChildByClass(JdlOptionName.class);
   }
 
   @Override
-  @NotNull
-  public JdlOptionTypeBody getOptionTypeBody() {
-    return findNotNullChildByClass(JdlOptionTypeBody.class);
+  @Nullable
+  public JdlOptionTypeValue getOptionTypeValue() {
+    return findChildByClass(JdlOptionTypeValue.class);
   }
 
 }

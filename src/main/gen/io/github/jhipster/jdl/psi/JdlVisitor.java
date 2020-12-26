@@ -7,14 +7,22 @@ import com.intellij.psi.PsiElementVisitor;
 public class JdlVisitor extends PsiElementVisitor {
 
   public void visitApplicationConfig(@NotNull JdlApplicationConfig o) {
+    visitComponent(o);
+  }
+
+  public void visitApplicationConfigBody(@NotNull JdlApplicationConfigBody o) {
     visitPsiCompositeElement(o);
   }
 
   public void visitApplicationDefinition(@NotNull JdlApplicationDefinition o) {
-    visitClass(o);
+    visitComponent(o);
   }
 
   public void visitApplicationEntities(@NotNull JdlApplicationEntities o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitApplicationTypeBody(@NotNull JdlApplicationTypeBody o) {
     visitPsiCompositeElement(o);
   }
 
@@ -54,6 +62,10 @@ public class JdlVisitor extends PsiElementVisitor {
     visitPsiCompositeElement(o);
   }
 
+  public void visitConfigItem(@NotNull JdlConfigItem o) {
+    visitPsiCompositeElement(o);
+  }
+
   public void visitConfigNumberItem(@NotNull JdlConfigNumberItem o) {
     visitPsiCompositeElement(o);
   }
@@ -82,6 +94,10 @@ public class JdlVisitor extends PsiElementVisitor {
     visitClass(o);
   }
 
+  public void visitEntityTypeBody(@NotNull JdlEntityTypeBody o) {
+    visitPsiCompositeElement(o);
+  }
+
   public void visitEnumConstantDeclaration(@NotNull JdlEnumConstantDeclaration o) {
     visitComponent(o);
   }
@@ -90,11 +106,15 @@ public class JdlVisitor extends PsiElementVisitor {
     visitClass(o);
   }
 
+  public void visitExcludeEntityNames(@NotNull JdlExcludeEntityNames o) {
+    visitPsiCompositeElement(o);
+  }
+
   public void visitFieldMember(@NotNull JdlFieldMember o) {
     visitComponent(o);
   }
 
-  public void visitFieldName(@NotNull JdlFieldName o) {
+  public void visitFieldType(@NotNull JdlFieldType o) {
     visitPsiCompositeElement(o);
   }
 
@@ -102,7 +122,19 @@ public class JdlVisitor extends PsiElementVisitor {
     visitPsiCompositeElement(o);
   }
 
+  public void visitFieldValidation(@NotNull JdlFieldValidation o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitFieldValidations(@NotNull JdlFieldValidations o) {
+    visitPsiCompositeElement(o);
+  }
+
   public void visitId(@NotNull JdlId o) {
+    visitPsiCompositeElement(o);
+  }
+
+  public void visitIncludeEntityNames(@NotNull JdlIncludeEntityNames o) {
     visitPsiCompositeElement(o);
   }
 
@@ -111,7 +143,7 @@ public class JdlVisitor extends PsiElementVisitor {
   }
 
   public void visitOptionDefinition(@NotNull JdlOptionDefinition o) {
-    visitClass(o);
+    visitComponent(o);
   }
 
   public void visitOptionDefinitions(@NotNull JdlOptionDefinitions o) {
@@ -119,10 +151,6 @@ public class JdlVisitor extends PsiElementVisitor {
   }
 
   public void visitOptionName(@NotNull JdlOptionName o) {
-    visitPsiCompositeElement(o);
-  }
-
-  public void visitOptionTypeBody(@NotNull JdlOptionTypeBody o) {
     visitPsiCompositeElement(o);
   }
 
@@ -138,8 +166,12 @@ public class JdlVisitor extends PsiElementVisitor {
     visitPsiCompositeElement(o);
   }
 
-  public void visitRelationshipDefinition(@NotNull JdlRelationshipDefinition o) {
+  public void visitRelationshipBody(@NotNull JdlRelationshipBody o) {
     visitPsiCompositeElement(o);
+  }
+
+  public void visitRelationshipDefinition(@NotNull JdlRelationshipDefinition o) {
+    visitComponent(o);
   }
 
   public void visitRelationshipFieldDisplayName(@NotNull JdlRelationshipFieldDisplayName o) {
@@ -158,15 +190,19 @@ public class JdlVisitor extends PsiElementVisitor {
     visitPsiCompositeElement(o);
   }
 
+  public void visitRelationshipSourceTypeOptions(@NotNull JdlRelationshipSourceTypeOptions o) {
+    visitPsiCompositeElement(o);
+  }
+
   public void visitRelationshipTargetType(@NotNull JdlRelationshipTargetType o) {
     visitPsiCompositeElement(o);
   }
 
-  public void visitRelationshipType(@NotNull JdlRelationshipType o) {
+  public void visitRelationshipTargetTypeOptions(@NotNull JdlRelationshipTargetTypeOptions o) {
     visitPsiCompositeElement(o);
   }
 
-  public void visitRelationshipTypeOptions(@NotNull JdlRelationshipTypeOptions o) {
+  public void visitRelationshipType(@NotNull JdlRelationshipType o) {
     visitPsiCompositeElement(o);
   }
 

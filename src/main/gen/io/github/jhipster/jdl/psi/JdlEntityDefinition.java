@@ -10,8 +10,8 @@ public interface JdlEntityDefinition extends JdlClass {
   @Nullable
   JdlComponentName getComponentName();
 
-  @NotNull
-  List<JdlFieldMember> getFieldMemberList();
+  @Nullable
+  JdlEntityTypeBody getEntityTypeBody();
 
   @NotNull
   List<JdlMetadata> getMetadataList();

@@ -5,21 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlApplicationConfig extends JdlPsiCompositeElement {
+public interface JdlApplicationConfig extends JdlComponent {
 
-  @NotNull
-  List<JdlConfigArrayItem> getConfigArrayItemList();
-
-  @NotNull
-  List<JdlConfigBooleanItem> getConfigBooleanItemList();
-
-  @NotNull
-  List<JdlConfigNumberItem> getConfigNumberItemList();
-
-  @NotNull
-  List<JdlConfigStringItem> getConfigStringItemList();
-
-  @NotNull
-  List<JdlPackageNameConfigItem> getPackageNameConfigItemList();
+  @Nullable
+  JdlApplicationConfigBody getApplicationConfigBody();
 
 }

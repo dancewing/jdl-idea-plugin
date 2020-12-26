@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlApplicationConfigImpl extends JdlPsiCompositeElementImpl implements JdlApplicationConfig {
+public class JdlApplicationConfigImpl extends AbstractJdlComponentImpl implements JdlApplicationConfig {
 
   public JdlApplicationConfigImpl(@NotNull ASTNode node) {
     super(node);
@@ -27,33 +27,9 @@ public class JdlApplicationConfigImpl extends JdlPsiCompositeElementImpl impleme
   }
 
   @Override
-  @NotNull
-  public List<JdlConfigArrayItem> getConfigArrayItemList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlConfigArrayItem.class);
-  }
-
-  @Override
-  @NotNull
-  public List<JdlConfigBooleanItem> getConfigBooleanItemList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlConfigBooleanItem.class);
-  }
-
-  @Override
-  @NotNull
-  public List<JdlConfigNumberItem> getConfigNumberItemList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlConfigNumberItem.class);
-  }
-
-  @Override
-  @NotNull
-  public List<JdlConfigStringItem> getConfigStringItemList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlConfigStringItem.class);
-  }
-
-  @Override
-  @NotNull
-  public List<JdlPackageNameConfigItem> getPackageNameConfigItemList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlPackageNameConfigItem.class);
+  @Nullable
+  public JdlApplicationConfigBody getApplicationConfigBody() {
+    return findChildByClass(JdlApplicationConfigBody.class);
   }
 
 }

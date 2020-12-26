@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlApplicationDefinitionImpl extends AbstractJdlPsiClass implements JdlApplicationDefinition {
+public class JdlApplicationDefinitionImpl extends AbstractJdlComponentImpl implements JdlApplicationDefinition {
 
   public JdlApplicationDefinitionImpl(@NotNull ASTNode node) {
     super(node);
@@ -28,20 +28,8 @@ public class JdlApplicationDefinitionImpl extends AbstractJdlPsiClass implements
 
   @Override
   @Nullable
-  public JdlApplicationConfig getApplicationConfig() {
-    return findChildByClass(JdlApplicationConfig.class);
-  }
-
-  @Override
-  @Nullable
-  public JdlApplicationEntities getApplicationEntities() {
-    return findChildByClass(JdlApplicationEntities.class);
-  }
-
-  @Override
-  @Nullable
-  public JdlOptionDefinitions getOptionDefinitions() {
-    return findChildByClass(JdlOptionDefinitions.class);
+  public JdlApplicationTypeBody getApplicationTypeBody() {
+    return findChildByClass(JdlApplicationTypeBody.class);
   }
 
 }

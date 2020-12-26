@@ -16,30 +16,12 @@ public abstract class AbstractJdlComponentImpl extends JdlPsiCompositeElementImp
   }
 
   @Override
-  public @Nullable JdlComponentName getComponentName() {
-    return null;
-  }
-
-  @Override
   public @Nullable PsiElement getNameIdentifier() {
     return null;
   }
 
   @Override
-  public String getName() {
-    final JdlComponentName name = getComponentName();
-    if (name != null) {
-      return name.getText();
-    }
-    return super.getName();
-  }
-
-  @Override
   public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
-    final JdlComponentName componentName = getComponentName();
-    if (componentName != null) {
-      componentName.setName(name);
-    }
     return this;
   }
 }

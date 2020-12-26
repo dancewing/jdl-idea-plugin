@@ -33,9 +33,9 @@ public class JdlEntityDefinitionImpl extends AbstractJdlPsiClass implements JdlE
   }
 
   @Override
-  @NotNull
-  public List<JdlFieldMember> getFieldMemberList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlFieldMember.class);
+  @Nullable
+  public JdlEntityTypeBody getEntityTypeBody() {
+    return findChildByClass(JdlEntityTypeBody.class);
   }
 
   @Override

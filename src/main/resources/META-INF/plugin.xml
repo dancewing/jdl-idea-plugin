@@ -11,6 +11,8 @@
   <!-- Product and plugin compatibility requirements -->
   <depends>com.intellij.modules.platform</depends>
   <depends>com.intellij.java</depends>
+  <depends config-file="plugin-uml.xml">com.intellij.diagram</depends>
+  <depends>com.intellij.velocity</depends>
 
   <!-- Text to display as description on Preferences/Settings | Plugin page -->
   <description>
@@ -52,11 +54,26 @@
     <lang.parserDefinition language="Jdl" implementationClass="io.github.jhipster.jdl.JdlParserDefinition"/>
 
     <lang.commenter language="Jdl" implementationClass="io.github.jhipster.jdl.JdlCommenter"/>
+
+    <codeFoldingOptionsProvider instance="io.github.jhipster.jdl.ide.folding.JdlCodeFoldingOptionsProvider"/>
+    <applicationService serviceImplementation="io.github.jhipster.jdl.ide.folding.JdlCodeFoldingSettings"/>
+    <lang.foldingBuilder language="Jdl" implementationClass="io.github.jhipster.jdl.ide.folding.JdlFoldingBuilder"/>
+
+    <completion.contributor language="Jdl" implementationClass="io.github.jhipster.jdl.ide.JdlCompletionContributor"/>
   </extensions>
 
   <actions>
     <action id="Jdl.NewJdlFile" class="io.github.jhipster.jdl.ide.actions.CreateJdlFileAction">
       <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
     </action>
+    <group id="Jdl.file.group" popup="false">
+      <action id="jdl.Generate" class="io.github.jhipster.jdl.ide.actions.GenerateAction" text="Generate Code">
+        <keyboard-shortcut keymap="$default" first-keystroke="control shift G"/>
+      </action>
+      <separator/>
+      <add-to-group group-id="ToolsMenu" anchor="before" relative-to-action="ExternalToolsGroup"/>
+      <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+    </group>
   </actions>
 </idea-plugin>

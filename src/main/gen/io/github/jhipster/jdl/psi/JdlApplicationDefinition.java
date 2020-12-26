@@ -5,15 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlApplicationDefinition extends JdlClass {
+public interface JdlApplicationDefinition extends JdlComponent {
 
   @Nullable
-  JdlApplicationConfig getApplicationConfig();
-
-  @Nullable
-  JdlApplicationEntities getApplicationEntities();
-
-  @Nullable
-  JdlOptionDefinitions getOptionDefinitions();
+  JdlApplicationTypeBody getApplicationTypeBody();
 
 }

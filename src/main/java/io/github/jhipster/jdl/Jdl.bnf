@@ -28,28 +28,45 @@
     AP_ENTITIES = 'entities'
     AP_CONFIG = 'config'
 
-    CFG_BASE_NAME = 'baseName'
-    CFG_APPLICATION_TYPE = 'applicationType'
-    CFG_PACKAGE_NAME = 'packageName'
-    CFG_SERVICE_DISCOVERY_TYPE = 'serviceDiscoveryType'
-    CFG_AUTHENTICATION_TYPE = 'authenticationType'
-    CFG_DATABASE_TYPE = 'databaseType'
-    CFG_PROD_DATABASE_TYPE = 'prodDatabaseType'
-    CFG_DEV_DATABASE_TYPE = 'devDatabaseType'
-    CFG_CACHE_PROVIDER = 'cacheProvider'
-    CFG_ENABLE_HIBERNATE_CACHE = 'enableHibernateCache'
-    CFG_BUILD_TOOL = 'buildTool'
-    CFG_CLIENT_FRAMEWORK = 'clientFramework'
-    CFG_USE_SASS = 'useSass'
-    CFG_TEST_FRAMEWORKS = 'testFrameworks'
-    CFG_SERVER_PORT = 'serverPort'
-    CFG_SKIP_USER_MANAGEMENT = 'skipUserManagement'
+    //application config items
+    APPLICATIONTYPE = 'applicationType'
+    AUTHENTICATIONTYPE = 'authenticationType'
+    BASENAME = 'baseName'
+    BUILDTOOL = 'buildTool'
+    CACHEPROVIDER = 'cacheProvider'
+    CLIENTFRAMEWORK = 'clientFramework'
+    CLIENTPACKAGEMANAGER = 'clientPackageManager'
+    CLIENTTHEME = 'clientTheme'
+    CLIENTTHEMEVARIANT = 'clientThemeVariant'
+    DATABASETYPE = 'databaseType'
+    DEVDATABASETYPE = 'devDatabaseType'
+    DTOSUFFIX = 'dtoSuffix'
+    ENABLEHIBERNATECACHE = 'enableHibernateCache'
+    ENABLESWAGGERCODEGEN = 'enableSwaggerCodegen'
+    ENABLETRANSLATION = 'enableTranslation'
+    ENTITYSUFFIX = 'entitySuffix'
+    JHIPREFIX = 'jhiPrefix'
+    LANGUAGES = 'languages'
+    MESSAGEBROKER = 'messageBroker'
+    NATIVELANGUAGE = 'nativeLanguage'
+    PACKAGENAME = 'packageName'
+    PRODDATABASETYPE = 'prodDatabaseType'
+    REACTIVE = 'reactive'
+    SEARCHENGINE = 'searchEngine'
+    SERVERPORT = 'serverPort'
+    SERVICEDISCOVERYTYPE = 'serviceDiscoveryType'
+    SKIPCLIENT = 'skipClient'
+    SKIPSERVER = 'skipServer'
+    SKIPUSERMANAGEMENT = 'skipUserManagement'
+    TESTFRAMEWORKS = 'testFrameworks'
+    USESASS = 'useSass'
 
+    //options
     OPTION_SERVICE = 'service'
     OPTION_PAGINATE = 'paginate'
     OPTION_MICRO_SERVICE = 'microservice'
-    OPTION_SKIP_CLIENT = 'skipClient'
-    OPTION_SKIP_SERVER = 'skipServer'
+//    OPTION_SKIP_CLIENT = 'skipClient'
+//    OPTION_SKIP_SERVER = 'skipServer'
     OPTION_NO_FLUENT_METHOD = 'noFluentMethod'
     OPTION_FILTER = 'filter'
     OPTION_READONLY = 'readOnly'
@@ -57,52 +74,6 @@
     OPTION_SEARCH = 'search'
     OPTION_ANGULAR_SUFFIX = 'angularSuffix'
     OPTION_CLIENT_ROOT_FOLDER = 'clientRootFolder'
-
-
-//    //application type
-//    CFG_OPTION_GATEWAY = 'gateway'
-//    CFG_OPTION_MONOLITH = 'monolith'
-//    CFG_OPTION_MICROSERVICE = 'microservice'
-//    CFG_OPTION_UAA = 'uaa'
-//
-//    //serviceDiscovery type
-//    CFG_OPTION_EUREKA = 'eureka'
-//    CFG_OPTION_CONSUL = 'consul'
-//    CFG_OPTION_NACOS = 'nacos'
-//
-//    //authentication type
-//    CFG_OPTION_JWT = 'jwt'
-//    CFG_OPTION_OAUTH2 = 'oauth2'
-//    CFG_OPTION_SESSION = 'session'
-//
-//    //database type
-//    CFG_OPTION_SQL = 'sql'
-//    CFG_OPTION_MONGODB = 'mongodb'
-//
-//    CFG_OPTION_MYSQL = 'mysql'
-//    CFG_OPTION_MARIADB = 'mariadb'
-//    CFG_OPTION_POSTGRESQL = 'postgresql'
-//    CFG_OPTION_ORACLE = 'oracle'
-//    CFG_OPTION_MSSQL = 'mssql'
-//
-//    //cache provider
-//    CFG_OPTION_EHCACHE = 'ehcache'
-//    CFG_OPTION_CAFFEINE = 'caffeine'
-//    CFG_OPTION_HAZELCAST = 'hazelcast'
-//    CFG_OPTION_INFINISPAN = 'infinispan'
-//    CFG_OPTION_MEMCACHED = 'memcached'
-//    CFG_OPTION_REDIS = 'redis'
-//
-//    CFG_OPTION_MAVEN = 'maven'
-//    CFG_OPTION_GRADLE = 'gradle'
-//
-//    CFG_OPTION_ANGULARX = 'angularX'
-//    CFG_OPTION_VUE = 'vue'
-//    CFG_OPTION_REACT = 'react'
-//
-//    CFG_OPTION_GATLING = 'gatling'
-//    CFG_OPTION_CUCUMBER = 'cucumber'
-//    CFG_OPTION_PROTRACTOR = 'protractor'
 
     ONE_TO_MANY = 'OneToMany'
     ONE_TO_ONE = 'OneToOne'
@@ -212,55 +183,23 @@
     RPAREN=")"
     SEMICOLON=";"
     MINUS="-"
-    MINUS_EQ="-="
-    MINUS_MINUS="--"
     PLUS="+"
-    PLUS_PLUS="++"
-    PLUS_EQ="+="
     DIV="/"
-    DIV_EQ="/="
     MUL="*"
-    MUL_EQ="*="
-    INT_DIV="~/"
-    INT_DIV_EQ="~/="
-    REM_EQ="%="
     REM="%"
     BIN_NOT="~"
     NOT="!"
 
-    EXPRESSION_BODY_DEF="=>"
     EQ="="
-    EQ_EQ="=="
-    NEQ="!="
     DOT="."
-    DOT_DOT=".."
-    QUEST_DOT_DOT="?.."
-    DOT_DOT_DOT="..."
-    DOT_DOT_DOT_QUEST="...?"
     COMMA=","
     COLON=":"
     GT=">"
-    GT_EQ=">="
-    GT_GT=">>"
-    GT_GT_EQ=">>="
     LT="<"
-    LT_EQ="<="
-    LT_LT="<<"
-    LT_LT_EQ="<<="
     OR="|"
-    OR_EQ="|="
-    OR_OR="||"
-    OR_OR_EQ="||="
     QUEST="?"
-    QUEST_DOT="?."
-    QUEST_QUEST="??"
-    QUEST_QUEST_EQ="??="
     XOR="^"
-    XOR_EQ="^="
     AND="&"
-    AND_EQ="&="
-    AND_AND="&&"
-    AND_AND_EQ="&&="
     HASH="#"
     AT="@"
   ]
@@ -270,32 +209,33 @@ jdlFile ::= entry*
 
 private entry ::= application_definition | entity_definition | enum_definition | option_definition | relationship_definition {
   recoverWhile = entry_recover
+
 }
 private entry_recover ::= !('@' | 'application' | 'entity' |  'enum' | 'service' | 'paginate' | 'microservice' | 'relationship')
 
-application_definition ::= 'application' application_type_body {
-  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlPsiClass" implements="io.github.jhipster.jdl.psi.JdlClass"
-}
+application_definition ::= 'application' application_type_body
+{pin=1  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
 
-private application_type_body ::= '{' application_type_body_inner '}' {pin=1}
+application_type_body ::= '{' application_type_body_inner '}' {pin=1}
 
 private application_type_body_inner ::= application_config application_entities option_definitions?
 
 application_config ::= 'config' application_config_body
+{pin=1  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
 
-private application_config_body ::= '{' config_item (','|';')? (config_item (','|';')?)* '}'
-private config_item ::= config_string_item | config_boolean_item | package_name_config_item | config_number_item | config_array_item {
+application_config_body ::= '{' config_item (','|';')? (config_item (','|';')?)* '}'
+config_item ::= config_string_item | config_boolean_item | package_name_config_item | config_number_item | config_array_item {
   recoverWhile = simple_scope_recover
 }
 config_string_item ::= config_string_item_key config_string_item_value
-config_string_item_key ::= 'baseName' | 'applicationType' | 'serviceDiscoveryType' | 'authenticationType' | 'databaseType' | 'prodDatabaseType' | 'devDatabaseType' | 'cacheProvider' | 'buildTool' | 'clientFramework'
+config_string_item_key ::= 'applicationType'|'authenticationType'|'baseName'|'buildTool'|'cacheProvider'|'clientFramework'|'clientPackageManager'|'clientTheme'|'clientThemeVariant'|'databaseType'|'devDatabaseType'|'dtoSuffix'|'entitySuffix'|'jhiPrefix'|'messageBroker'|'nativeLanguage'|'prodDatabaseType'|'searchEngine'|'serviceDiscoveryType'
 config_string_item_value ::= IDENTIFIER | 'microservice'
 
 package_name_config_item ::= 'packageName' package_name_identifier
 package_name_identifier ::= PACKAGE_NAME
 
 config_boolean_item ::= config_boolean_item_key config_boolean_item_value
-config_boolean_item_key ::= 'enableHibernateCache' | 'useSass' | 'skipUserManagement'
+config_boolean_item_key ::= 'enableHibernateCache'|'enableSwaggerCodegen'|'enableTranslation'|'reactive'|'skipClient'|'skipServer'|'skipUserManagement'|'useSass'
 config_boolean_item_value ::= 'true' | 'false'
 
 config_number_item ::= config_number_item_key config_number_item_value
@@ -303,27 +243,28 @@ config_number_item_key ::= 'serverPort'
 config_number_item_value ::= NUMBER
 
 config_array_item ::= config_array_item_key '['config_array_item_values ']'
-config_array_item_key ::= 'testFrameworks'
+config_array_item_key ::= 'languages'|'testFrameworks'
 private config_array_item_values ::= config_array_item_value(','config_array_item_value)*
 config_array_item_value ::= IDENTIFIER
 
-application_entities ::= 'entities' ('*' | entity_names) ('except' entity_names)?
-
-private entity_names ::= entity_name (',' entity_name)*
+application_entities ::= 'entities' ('*' | include_entity_names) ('except' exclude_entity_names)?
+include_entity_names ::= entity_name (',' entity_name)*
+exclude_entity_names ::= entity_name (',' entity_name)*
 
 option_definitions ::= option_definition* {
   recoverWhile = option_definition_recover
 }
 private option_definition_recover ::= !(option_name | '}')
 
+
+//
 entity_definition ::= metadata* 'entity' entity_name entity_type_body?
 {pin=2  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlPsiClass" implements="io.github.jhipster.jdl.psi.JdlClass"}
-
 private entity_name ::= componentName
 
 componentName ::= << nonStrictID >> {mixin="io.github.jhipster.jdl.psi.impl.JdlNamedElementImpl" implements="io.github.jhipster.jdl.psi.JdlNamedElement"}
 
-private entity_type_body ::= '{' entity_type_body_inner '}' {pin = 1}
+entity_type_body ::= '{' entity_type_body_inner '}' {pin = 1}
 
 private entity_type_body_inner ::= field_member* {
   recoverWhile = simple_scope_recover
@@ -332,14 +273,12 @@ private entity_type_body_inner ::= field_member* {
 field_member ::= metadata* field_name field_type_definition field_validations? (','|';')?
 {mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
 
-field_name ::= componentName
+private field_name ::= componentName
 
-private field_member_recover ::= !(<<nonStrictID>> | field_type | '}' )
-
-field_type_definition ::= field_type | 'String' | 'Integer' | 'Long' | 'BigDecimal' | 'Float' | 'Double' | 'Enum' | 'Boolean' | 'LocalDate' | 'Instant'| 'ZonedDateTime' | 'Blob' | 'AnyBlob' | 'ImageBlob' | 'TextBlob'
-private field_type ::=  componentName
-private field_validations ::= field_validation(field_validation)*
-private field_validation ::= 'required' | 'unique' | minlength | maxlength | min | max | minbytes | maxbytes | pattern
+field_type_definition ::= IDENTIFIER | 'String' | 'Integer' | 'Long' | 'BigDecimal' | 'Float' | 'Double' | 'Enum' | 'Boolean' | 'LocalDate' | 'Instant'| 'ZonedDateTime' | 'Blob' | 'AnyBlob' | 'ImageBlob' | 'TextBlob'
+field_type ::=  componentName
+field_validations ::= field_validation (field_validation)*
+field_validation ::= 'required' | 'unique' | minlength | maxlength | min | max | minbytes | maxbytes | pattern
 private minlength ::= 'minlength' '(' NUMBER ')'
 private maxlength ::= 'maxlength' '(' NUMBER ')'
 private min ::= 'min' '(' NUMBER ')'
@@ -357,20 +296,24 @@ enumConstantDeclaration ::= componentName
 {mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
 
 //
-option_definition ::= option_name option_type_body {
-  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlPsiClass" implements="io.github.jhipster.jdl.psi.JdlClass"
-}
+option_definition ::= option_name option_type_body
+{pin=1  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
+
 option_name ::= ('service' | 'paginate' | 'microservice' | 'skipClient' | 'skipServer' | 'noFluentMethod' | 'filter' | 'readOnly' | 'dto' | 'search' | 'angularSuffix' | 'clientRootFolder')
-option_type_body ::= ('*' | entity_names) 'with' option_type_value ('except' entity_names)?
+private option_type_body ::= ('*' | include_entity_names) 'with' option_type_value ('except' exclude_entity_names)?
 option_type_value ::= IDENTIFIER
 
 private simple_scope_recover ::= !(','| ';' | '}')
 
 relationship_definition ::= 'relationship' relationship_type relationship_body
-relationship_type ::= 'OneToOne' | 'OneToMany' | 'ManyToOne' | 'ManyToMany'
-private relationship_body ::= '{' relationship_items (','|';')? (relationship_items (','|';')?)* '}'
-relationship_items ::= metadata* relationship_source_type relationship_type_options? 'to' relationship_target_type relationship_type_options?
-relationship_type_options ::= '{' relationship_field_name relationship_field_display_name? 'required'? '}'
+{pin=1  mixin="io.github.jhipster.jdl.psi.impl.AbstractJdlComponentImpl" implements="io.github.jhipster.jdl.psi.JdlComponent"}
+
+relationship_type ::= ('OneToOne' | 'OneToMany' | 'ManyToOne' | 'ManyToMany')
+relationship_body ::= '{' relationship_items (','|';')? (relationship_items (','|';')?)* '}'
+relationship_items ::= metadata* relationship_source_type relationship_source_type_options? 'to' relationship_target_type relationship_target_type_options?
+relationship_source_type_options ::= relationship_type_options
+relationship_target_type_options ::= relationship_type_options
+private relationship_type_options ::= '{' relationship_field_name relationship_field_display_name? 'required'? '}'
 relationship_field_name ::= entity_name
 relationship_field_display_name ::= '(' entity_name ')'
 relationship_source_type ::= entity_name

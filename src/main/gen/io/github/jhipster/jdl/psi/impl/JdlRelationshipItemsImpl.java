@@ -39,15 +39,21 @@ public class JdlRelationshipItemsImpl extends JdlPsiCompositeElementImpl impleme
   }
 
   @Override
+  @Nullable
+  public JdlRelationshipSourceTypeOptions getRelationshipSourceTypeOptions() {
+    return findChildByClass(JdlRelationshipSourceTypeOptions.class);
+  }
+
+  @Override
   @NotNull
   public JdlRelationshipTargetType getRelationshipTargetType() {
     return findNotNullChildByClass(JdlRelationshipTargetType.class);
   }
 
   @Override
-  @NotNull
-  public List<JdlRelationshipTypeOptions> getRelationshipTypeOptionsList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlRelationshipTypeOptions.class);
+  @Nullable
+  public JdlRelationshipTargetTypeOptions getRelationshipTargetTypeOptions() {
+    return findChildByClass(JdlRelationshipTargetTypeOptions.class);
   }
 
 }

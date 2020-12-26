@@ -13,10 +13,13 @@ public interface JdlRelationshipItems extends JdlPsiCompositeElement {
   @NotNull
   JdlRelationshipSourceType getRelationshipSourceType();
 
+  @Nullable
+  JdlRelationshipSourceTypeOptions getRelationshipSourceTypeOptions();
+
   @NotNull
   JdlRelationshipTargetType getRelationshipTargetType();
 
-  @NotNull
-  List<JdlRelationshipTypeOptions> getRelationshipTypeOptionsList();
+  @Nullable
+  JdlRelationshipTargetTypeOptions getRelationshipTargetTypeOptions();
 
 }

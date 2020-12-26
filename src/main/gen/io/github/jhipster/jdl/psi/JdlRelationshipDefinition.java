@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JdlRelationshipDefinition extends JdlPsiCompositeElement {
+public interface JdlRelationshipDefinition extends JdlComponent {
 
-  @NotNull
-  List<JdlRelationshipItems> getRelationshipItemsList();
+  @Nullable
+  JdlRelationshipBody getRelationshipBody();
 
-  @NotNull
+  @Nullable
   JdlRelationshipType getRelationshipType();
 
 }

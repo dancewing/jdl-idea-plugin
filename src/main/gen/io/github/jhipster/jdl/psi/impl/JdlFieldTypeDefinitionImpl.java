@@ -26,10 +26,4 @@ public class JdlFieldTypeDefinitionImpl extends JdlPsiCompositeElementImpl imple
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public JdlComponentName getComponentName() {
-    return findChildByClass(JdlComponentName.class);
-  }
-
 }

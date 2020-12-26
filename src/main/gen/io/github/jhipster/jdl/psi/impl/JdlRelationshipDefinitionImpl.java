@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static io.github.jhipster.jdl.psi.JdlTypes.*;
 import io.github.jhipster.jdl.psi.*;
 
-public class JdlRelationshipDefinitionImpl extends JdlPsiCompositeElementImpl implements JdlRelationshipDefinition {
+public class JdlRelationshipDefinitionImpl extends AbstractJdlComponentImpl implements JdlRelationshipDefinition {
 
   public JdlRelationshipDefinitionImpl(@NotNull ASTNode node) {
     super(node);
@@ -27,15 +27,15 @@ public class JdlRelationshipDefinitionImpl extends JdlPsiCompositeElementImpl im
   }
 
   @Override
-  @NotNull
-  public List<JdlRelationshipItems> getRelationshipItemsList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, JdlRelationshipItems.class);
+  @Nullable
+  public JdlRelationshipBody getRelationshipBody() {
+    return findChildByClass(JdlRelationshipBody.class);
   }
 
   @Override
-  @NotNull
+  @Nullable
   public JdlRelationshipType getRelationshipType() {
-    return findNotNullChildByClass(JdlRelationshipType.class);
+    return findChildByClass(JdlRelationshipType.class);
   }
 
 }
